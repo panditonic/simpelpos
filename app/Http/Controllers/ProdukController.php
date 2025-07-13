@@ -18,6 +18,29 @@ class ProdukController extends Controller
             // Fetch products with related kategori and merek
             $products = Produk::with(['kategori', 'merek'])->select('produks.*');
 
+            // Apply custom filters
+            $products->when($request->kategori, function ($query) use ($request) {
+                return $query->whereHas('kategori', function ($q) use ($request) {
+                    $q->where('id', $request->kategori); // Assuming kategori has an 'id' column
+                });
+            })->when($request->merek, function ($query) use ($request) {
+                return $query->whereHas('merek', function ($q) use ($request) {
+                    $q->where('id', $request->merek); // Assuming merek has an 'id' column
+                });
+            })->when($request->status !== null, function ($query) use ($request) {
+                return $query->where('aktif', $request->status); // Assuming status is 'aktif' (0 or 1)
+            })->when($request->stok !== null, function ($query) use ($request) {
+                return $query->where('stok_minimum', '>=', $request->stok); // Filter by minimum stock
+            })->when($request->harga_min, function ($query) use ($request) {
+                return $query->where('harga_jual', '>=', $request->harga_min);
+            })->when($request->harga_max, function ($query) use ($request) {
+                return $query->where('harga_jual', '<=', $request->harga_max);
+            })->when($request->barcode, function ($query) use ($request) {
+                return $query->where('kode_barcode', $request->barcode); // Assuming 'barcode' is a column in produks table
+            })->when($request->satuan, function ($query) use ($request) {
+                return $query->where('satuan', $request->satuan); // Assuming 'satuan' is a column in produks table
+            });
+
             return DataTables::of($products)
                 ->addColumn('dimensi', function ($product) {
                     return number_format($product->panjang, 2) . ' x ' .
@@ -56,7 +79,12 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        return view("produk.index");
+        // Fetch all categories and brands
+        $kategoris = Kategori::select('id', 'nama')->get();
+        $mereks = Merek::select('id', 'nama')->get();
+
+        // Pass data to the view
+        return view('produk.index', compact('kategoris', 'mereks'));
     }
 
     /**
@@ -209,8 +237,8 @@ class ProdukController extends Controller
             $validator = Validator::make($request->all(), [
                 'nama' => 'required|string|max:255',
                 'slug' => 'required|string|max:255',
-                'kode_sku' => 'required|string|max:50|unique:produks,kode_sku,'.$id,
-                'kode_barcode' => 'nullable|string|max:100|unique:produks,kode_barcode,'.$id,
+                'kode_sku' => 'required|string|max:50|unique:produks,kode_sku,' . $id,
+                'kode_barcode' => 'nullable|string|max:100|unique:produks,kode_barcode,' . $id,
                 'satuan' => 'required|string|max:50',
                 'id_kategori' => 'required|exists:kategoris,id',
                 'id_merek' => 'required|exists:mereks,id',

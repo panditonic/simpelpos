@@ -33,6 +33,81 @@
                         </div>
                     </div>
 
+                    <!-- Custom Filter Section -->
+                    <form id="filter-form">
+                        <div class="row g-3">
+                            <!-- Kategori -->
+                            <div class="col-md-4">
+                                <label for="filter-kategori" class="form-label">Kategori</label>
+                                <select id="filter-kategori" name="kategori" class="form-select">
+                                    <option value="">All</option>
+                                    @foreach ($kategoris as $kategori)
+                                    <option value="{{ $kategori->id }}">{{ $kategori->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <!-- Merek -->
+                            <div class="col-md-4">
+                                <label for="filter-merek" class="form-label">Merek</label>
+                                <select id="filter-merek" name="merek" class="form-select">
+                                    <option value="">All</option>
+                                    @foreach ($mereks as $merek)
+                                    <option value="{{ $merek->id }}">{{ $merek->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <!-- Status -->
+                            <div class="col-md-4">
+                                <label for="filter-status" class="form-label">Status</label>
+                                <select id="filter-status" name="status" class="form-select">
+                                    <option value="">All</option>
+                                    <option value="1">Active</option>
+                                    <option value="0">Inactive</option>
+                                </select>
+                            </div>
+
+                            <!-- Stok (Min) -->
+                            <div class="col-md-4">
+                                <label for="filter-stok" class="form-label">Stok (Min)</label>
+                                <input type="number" id="filter-stok" name="stok" class="form-control" min="0" placeholder="0">
+                            </div>
+
+                            <!-- Harga Min -->
+                            <div class="col-md-4">
+                                <label for="filter-harga-min" class="form-label">Harga Min (jual)</label>
+                                <input type="number" id="filter-harga-min" name="harga_min" class="form-control" min="0" placeholder="0">
+                            </div>
+
+                            <!-- Harga Max -->
+                            <div class="col-md-4">
+                                <label for="filter-harga-max" class="form-label">Harga Max (jual)</label>
+                                <input type="number" id="filter-harga-max" name="harga_max" class="form-control" min="0" placeholder="0">
+                            </div>
+
+                            <!-- Barcode -->
+                            <div class="col-md-4">
+                                <label for="filter-barcode" class="form-label">Barcode</label>
+                                <input type="text" id="filter-barcode" name="barcode" class="form-control" placeholder="1234567890">
+                            </div>
+
+                            <!-- Satuan -->
+                            <div class="col-md-4">
+                                <label for="filter-satuan" class="form-label">Satuan</label>
+                                <input type="text" id="filter-satuan" name="satuan" class="form-control" placeholder="e.g., pcs, kg">
+                            </div>
+
+                            <!-- Buttons -->
+                            <div class="col-md-4 d-flex align-items-end">
+                                <div class="btn-group w-100">
+                                    <button type="button" id="filter-apply" class="btn btn-primary">Apply Filters</button>
+                                    <button type="button" id="filter-clear" class="btn btn-secondary">Clear Filters</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
                     <div class="table-responsive">
                         <table id="productsTable" class="table table-hover table-striped dt-responsive nowrap" style="width:100%">
                             <thead class="table-dark">
@@ -388,7 +463,19 @@
         var table = $('#productsTable').DataTable({
             processing: true,
             serverSide: true,
-            ajax: '{{ route("produks.datatable") }}',
+            ajax: {
+                url: '{{ route("produks.datatable") }}',
+                data: function(d) {
+                    d.kategori = $('#filter-kategori').val();
+                    d.merek = $('#filter-merek').val();
+                    d.status = $('#filter-status').val();
+                    d.stok = $('#filter-stok').val();
+                    d.harga_min = $('#filter-harga-min').val();
+                    d.harga_max = $('#filter-harga-max').val();
+                    d.barcode = $('#filter-barcode').val();
+                    d.satuan = $('#filter-satuan').val();
+                }
+            },
             columns: [{
                     data: null,
                     name: 'no',
@@ -587,6 +674,17 @@
             scrollX: true,
             scrollCollapse: true,
             fixedColumns: true
+        });
+
+        // Apply filters on button click
+        $('#filter-apply').on('click', function() {
+            table.draw();
+        });
+
+        // Clear Filters Button
+        $('#filter-clear').on('click', function() {
+            $('#filter-form')[0].reset(); // Reset all form inputs
+            table.draw(); // Redraw table with no filters
         });
 
         // Setup column visibility modal

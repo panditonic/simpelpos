@@ -15,5 +15,7 @@ responsive tampilannya.
 ![login](/docs/login.png)
 3. chart analitik
 ![analitik](/docs/analitik.png)
-3. crud enrichment
+4. crud enrichment
 ![analitik](/docs/crudenrichment.png)
+4. crud customfilter
+![analitik](/docs/crudcustomfilter.png)
