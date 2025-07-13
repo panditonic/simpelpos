@@ -11,3 +11,5 @@ bebas pakai boleh ditakatik.
 ![dasbor](/docs/dasbor.png)
 2. halaman login
 ![login](/docs/login.png)
+2. chart analitik
+![analitik](/docs/analitik.png)

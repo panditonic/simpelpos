@@ -7,15 +7,21 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        .btn-link {
+            text-decoration: none !important;
+        }
+        
         :root {
             --sidebar-width: 250px;
             --sidebar-collapsed-width: 70px;
             --navbar-height: 60px;
+            --footer-height: 50px;
         }
         
         body {
             background-color: #f8f9fa;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-bottom: var(--footer-height);
         }
         
         .navbar {
@@ -108,6 +114,7 @@
             margin-top: var(--navbar-height);
             padding: 20px;
             transition: margin-left 0.3s ease;
+            min-height: calc(100vh - var(--navbar-height) - var(--footer-height));
         }
         
         .main-content.expanded {
@@ -159,7 +166,7 @@
         }
         
         .stats-card h3 {
-            font-size: 2rem;
+            font-size: 1.3rem;
             font-weight: bold;
             margin: 0;
             color: #2c3e50;
@@ -226,18 +233,177 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
         
-        @media (max-width: 768px) {
-            .sidebar {
-                width: var(--sidebar-collapsed-width);
+        /* Footer */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: var(--footer-height);
+            background: #2c3e50;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            font-size: 0.9rem;
+        }
+        
+        /* Desktop - Show datetime in navbar, hide footer */
+        @media (min-width: 992px) {
+            .datetime-display {
+                display: block;
+            }
+            
+            .footer {
+                display: none;
+            }
+            
+            body {
+                padding-bottom: 0;
             }
             
             .main-content {
+                min-height: calc(100vh - var(--navbar-height));
+            }
+        }
+        
+        /* Tablet and mobile - Hide datetime in navbar, show footer */
+        @media (max-width: 991px) {
+            .datetime-display {
+                display: none;
+            }
+            
+            .footer {
+                display: flex;
+            }
+            
+            body {
+                padding-bottom: var(--footer-height);
+            }
+        }
+        
+        /* Media query for tablet sizes - Auto collapsed but can be toggled */
+        @media (max-width: 800px) {
+            .sidebar:not(.force-expanded) {
+                width: var(--sidebar-collapsed-width);
+            }
+            
+            .main-content:not(.force-contracted) {
                 margin-left: var(--sidebar-collapsed-width);
+            }
+            
+            .sidebar:not(.force-expanded) .sidebar-header h5 {
+                display: none;
+            }
+            
+            .sidebar:not(.force-expanded) .sidebar-menu span {
+                display: none;
+            }
+            
+            .sidebar:not(.force-expanded) .sidebar-menu a {
+                justify-content: center;
+            }
+            
+            .sidebar:not(.force-expanded) .sidebar-menu i {
+                margin-right: 0px !important;
+            }
+        }
+        
+        /* Mobile breakpoint - Auto collapsed but can be toggled */
+        @media (max-width: 768px) {
+            .sidebar:not(.force-expanded) {
+                width: var(--sidebar-collapsed-width);
+            }
+            
+            .main-content:not(.force-contracted) {
+                margin-left: var(--sidebar-collapsed-width);
+            }
+            
+            .navbar-brand {
+                font-size: 1rem;
+            }
+            
+            .stats-card {
+                padding: 15px;
+            }
+            
+            .chart-container {
+                padding: 15px;
+            }
+        }
+        
+        /* Extra small screens */
+        @media (max-width: 576px) {
+            .navbar-brand {
+                font-size: 0.9rem;
+            }
+            
+            .stats-card h3 {
+                font-size: 1.1rem;
+            }
+            
+            .stats-card p {
+                font-size: 0.8rem;
+            }
+            
+            .chart-title {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Force expanded state for responsive */
+        .sidebar.force-expanded {
+            width: var(--sidebar-width) !important;
+        }
+        
+        .sidebar.force-expanded .sidebar-header h5 {
+            display: block !important;
+        }
+        
+        .sidebar.force-expanded .sidebar-menu span {
+            display: inline !important;
+        }
+        
+        .sidebar.force-expanded .sidebar-menu a {
+            justify-content: flex-start !important;
+        }
+        
+        .sidebar.force-expanded .sidebar-menu i {
+            margin-right: 10px !important;
+        }
+        
+        .main-content.force-contracted {
+            margin-left: var(--sidebar-width) !important;
+        }
+        
+        /* Overlay for mobile when sidebar is expanded */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1010;
+            display: none;
+        }
+        
+        .sidebar-overlay.show {
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar.force-expanded {
+                z-index: 1025;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Sidebar Overlay for mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    
     <!-- Top Navbar -->
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
@@ -245,7 +411,7 @@
                 <i class="fas fa-bars"></i>
             </button>
             
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/dasbor">
                 <i class="fas fa-cash-register me-2"></i>
                 Point of Sales
             </a>
@@ -279,7 +445,7 @@
         
         <ul class="sidebar-menu">
             <li>
-                <a href="#" class="active">
+                <a href="/dasbor" class="active">
                     <i class="fas fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
@@ -390,21 +556,21 @@
                     </div>
                 </div>
                 
-                <div class="col-xl-4">
+                <div class="col-xl-4 col-sm-4">
                     <div class="chart-container">
                         <div class="chart-title">Produk Terlaris</div>
                         <canvas id="topProductsChart" width="400" height="200"></canvas>
                     </div>
                 </div>
 
-                <div class="col-xl-4">
+                <div class="col-xl-4 col-sm-4">
                     <div class="chart-container">
                         <div class="chart-title">Produk Terlaris</div>
                         <canvas id="topProductsChart1" width="400" height="200"></canvas>
                     </div>
                 </div>
 
-                <div class="col-xl-4">
+                <div class="col-xl-4 col-sm-4">
                     <div class="chart-container">
                         <div class="chart-title">Produk Terlaris</div>
                         <canvas id="topProductsChart2" width="400" height="200"></canvas>
@@ -441,16 +607,75 @@
         </div>
     </div>
 
+    <!-- Footer (visible on mobile/tablet) -->
+    <footer class="footer">
+        <div id="footerDateTime">
+            Loading...
+        </div>
+    </footer>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script>
-        // Toggle Sidebar
+        // Enhanced Toggle Sidebar with responsive support
         document.getElementById('toggleSidebar').addEventListener('click', function() {
             const sidebar = document.getElementById('sidebar');
             const mainContent = document.getElementById('mainContent');
+            const overlay = document.getElementById('sidebarOverlay');
             
-            sidebar.classList.toggle('collapsed');
-            mainContent.classList.toggle('expanded');
+            // Check if we're in responsive mode
+            const isResponsive = window.innerWidth <= 768;
+            
+            if (isResponsive) {
+                // Mobile behavior
+                if (sidebar.classList.contains('force-expanded')) {
+                    // Close sidebar
+                    sidebar.classList.remove('force-expanded');
+                    mainContent.classList.remove('force-contracted');
+                    overlay.classList.remove('show');
+                } else {
+                    // Open sidebar
+                    sidebar.classList.add('force-expanded');
+                    mainContent.classList.add('force-contracted');
+                    overlay.classList.add('show');
+                }
+            } else {
+                // Desktop behavior
+                if (sidebar.classList.contains('collapsed')) {
+                    // Expand sidebar
+                    sidebar.classList.remove('collapsed');
+                    mainContent.classList.remove('expanded');
+                } else {
+                    // Collapse sidebar
+                    sidebar.classList.add('collapsed');
+                    mainContent.classList.add('expanded');
+                }
+            }
+        });
+
+        // Close sidebar when clicking overlay
+        document.getElementById('sidebarOverlay').addEventListener('click', function() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            sidebar.classList.remove('force-expanded');
+            mainContent.classList.remove('force-contracted');
+            overlay.classList.remove('show');
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            if (window.innerWidth > 768) {
+                // Desktop - remove mobile classes
+                sidebar.classList.remove('force-expanded');
+                mainContent.classList.remove('force-contracted');
+                overlay.classList.remove('show');
+            }
         });
 
         // Indonesian DateTime
@@ -468,7 +693,11 @@
             };
             
             const indonesianDateTime = new Intl.DateTimeFormat('id-ID', options).format(now);
-            document.getElementById('currentDateTime').textContent = indonesianDateTime + ' WIB';
+            const formattedTime = indonesianDateTime + ' WIB';
+            
+            // Update both navbar and footer datetime
+            document.getElementById('currentDateTime').textContent = formattedTime;
+            document.getElementById('footerDateTime').textContent = formattedTime;
         }
 
         // Update datetime every second
