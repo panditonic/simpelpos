@@ -108,7 +108,7 @@
                         </div>
                     </form>
 
-                    <div class="table-responsive">
+                    <div class="table-responsive mt-4">
                         <table id="productsTable" class="table table-hover table-striped dt-responsive nowrap" style="width:100%">
                             <thead class="table-dark">
                                 <tr>
@@ -457,6 +457,14 @@
 @endpush
 
 @push('scripts')
+<!-- DataTables CSS with Bootstrap 5 integration -->
+<link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.bootstrap5.min.css" rel="stylesheet">
+
+<!-- DataTables JS with Bootstrap 5 and Responsive extensions -->
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
+
 <script>
     $(document).ready(function() {
         // Inisialisasi DataTable dengan opsi responsive
@@ -671,6 +679,7 @@
                     previous: "Sebelumnya"
                 }
             },
+            fixedHeader: true,
             scrollX: true,
             scrollCollapse: true,
             fixedColumns: true

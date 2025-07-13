@@ -7,7 +7,7 @@
     <title>Dashboard - Point of Sales</title>
     <!-- In <head> -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css">
+
     <link rel="icon" type="image/png" href="https://img.icons8.com/?size=100&id=g1VKFeZ7mFa2&format=png&color=000000">
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
@@ -218,8 +218,7 @@
         </script>
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
+
         <script>
             $.ajaxSetup({
                 headers: {
