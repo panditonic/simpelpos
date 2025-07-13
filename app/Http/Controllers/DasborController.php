@@ -8,6 +8,6 @@ class DasborController extends Controller
 {
     function index(Request $request)
     {
-        return view("dasbor");
+        return view("home");
     }
 }
