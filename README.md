@@ -4,6 +4,8 @@ aplikasi simpelpos dibangun pakai laravel v10.
 gratis tanpa aneh-aneh. 
 <br>
 bebas pakai boleh ditakatik.
+<br>
+responsive tampilannya.
 
 ## ini tampilannya
 

@@ -587,7 +587,7 @@
                             <table class="table table-hover">
                                 <thead class="table-dark">
                                     <tr>
-                                        <th>ID Transaksi</th>
+                                        <th>Transaksi</th>
                                         <th>Pelanggan</th>
                                         <th>Produk</th>
                                         <th>Jumlah</th>
@@ -689,7 +689,7 @@
                 hour: '2-digit',
                 minute: '2-digit',
                 second: '2-digit',
-                timeZone: 'Asia/Jakarta'
+                timeZone: 'Asia/Jayapura'
             };
             
             const indonesianDateTime = new Intl.DateTimeFormat('id-ID', options).format(now);
@@ -736,6 +736,8 @@
             animateNumber(document.getElementById('totalProducts'), 1250);
             animateNumber(document.getElementById('lowStock'), 23);
 
+            const datestring = Date.now();
+            
             // Populate recent sales table
             const recentSales = [
                 { id: 'TRX001', customer: 'Budi Santoso', product: 'Smartphone Samsung', qty: 1, total: 3500000, time: '10:30', status: 'Selesai' },
