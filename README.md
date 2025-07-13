@@ -13,5 +13,7 @@ responsive tampilannya.
 ![dasbor](/docs/dasbor.png)
 2. halaman login
 ![login](/docs/login.png)
-2. chart analitik
+3. chart analitik
 ![analitik](/docs/analitik.png)
+3. crud enrichment
+![analitik](/docs/crudenrichment.png)
