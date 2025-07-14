@@ -51,9 +51,10 @@
                             <hr class="dropdown-divider">
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#" onclick="confirmLogout()">
-                                <i class="fas fa-sign-out-alt me-2"></i>Logout
-                            </a>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt me-2"></i>Logout</button>
+                            </form>
                         </li>
                     </ul>
                 </div>
@@ -132,9 +133,6 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.12.4/sweetalert2.all.min.js"></script>
-        
         <script>
             // Get CSRF token from meta tag
             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -248,64 +246,9 @@
             // Update datetime every second
             setInterval(updateDateTime, 1000);
             updateDateTime();
-
-            // SweetAlert Logout Confirmation
-            function confirmLogout() {
-                Swal.fire({
-                    title: 'Konfirmasi Logout',
-                    text: 'Apakah Anda yakin ingin keluar dari sistem?',
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Ya, Logout!',
-                    cancelButtonText: 'Batal',
-                    reverseButtons: true
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Show loading
-                        Swal.fire({
-                            title: 'Logging out...',
-                            text: 'Mohon tunggu sebentar',
-                            allowOutsideClick: false,
-                            allowEscapeKey: false,
-                            showConfirmButton: false,
-                            willOpen: () => {
-                                Swal.showLoading();
-                            }
-                        });
-
-                        // Perform logout
-                        $.ajax({
-                            url: '{{ route("logout") }}',
-                            type: 'POST',
-                            data: {
-                                _token: csrfToken
-                            },
-                            success: function(response) {
-                                Swal.fire({
-                                    title: 'Berhasil Logout!',
-                                    text: 'Anda akan dialihkan ke halaman login',
-                                    icon: 'success',
-                                    timer: 1500,
-                                    showConfirmButton: false
-                                }).then(() => {
-                                    window.location.href = '/login';
-                                });
-                            },
-                            error: function(xhr, status, error) {
-                                Swal.fire({
-                                    title: 'Error!',
-                                    text: 'Terjadi kesalahan saat logout. Silakan coba lagi.',
-                                    icon: 'error',
-                                    confirmButtonText: 'OK'
-                                });
-                            }
-                        });
-                    }
-                });
-            }
         </script>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         <script>
             $.ajaxSetup({
