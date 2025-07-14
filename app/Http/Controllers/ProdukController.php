@@ -7,6 +7,7 @@ use App\Models\Merek;
 use App\Models\Produk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -129,6 +130,7 @@ class ProdukController extends Controller
                 'stok_minimum' => 'required|numeric|min:0',
                 'deskripsi' => 'nullable|string',
                 'aktif' => 'boolean',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Max 2MB
             ]);
 
             if ($validator->fails()) {
@@ -140,6 +142,15 @@ class ProdukController extends Controller
 
             try {
                 DB::beginTransaction();
+
+                $imagePath = null;
+                if ($request->hasFile('gambar')) {
+                    $image = $request->file('gambar');
+                    $imageName = time() . '_' . $image->getClientOriginalName();
+                    // $imagePath = $image->storeAs('produk', $imageName, 'public');
+                    $storagePath = $image->store('public/produk');
+                    $imagePath = str_replace('public/', 'storage/', $storagePath); // Store relative path for consistency
+                }
 
                 $produk = Produk::create([
                     'nama' => $request->nama,
@@ -159,6 +170,7 @@ class ProdukController extends Controller
                     'jumlah_stok' => $request->jumlah_stok,
                     'stok_minimum' => $request->stok_minimum,
                     'aktif' => $request->aktif ?? true,
+                    'gambar' => $imagePath,
                 ]);
 
                 DB::commit();
@@ -252,6 +264,7 @@ class ProdukController extends Controller
                 'stok_minimum' => 'required|numeric|min:0',
                 'deskripsi' => 'nullable|string',
                 'aktif' => 'boolean',
+                'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // Max 2MB
             ]);
 
             if ($validator->fails()) {
@@ -283,6 +296,25 @@ class ProdukController extends Controller
                     'stok_minimum' => $request->stok_minimum,
                     'aktif' => $request->aktif ?? true,
                 ]);
+
+                // Handle image upload
+                if ($request->hasFile('gambar')) {
+                    // Delete old image if exists
+                    if (file_exists($produk->gambar)) {
+                        unlink($produk->gambar);
+                        // return response()->json([
+                        //     'success' => true,
+                        //     'message' => 'Gambar tersedia ' . $produk->gambar,
+                        // ]);
+                    }
+
+                    // Store new image
+                    $imagePath = $request->file('gambar')->store('public/produk');
+                    // Convert storage path to relative path
+                    $updateData['gambar'] = str_replace('public/', 'storage/', $imagePath);
+                }
+
+                $produk->update($updateData);
 
                 DB::commit();
 
@@ -316,6 +348,15 @@ class ProdukController extends Controller
             }
 
             try {
+                // delete gambar
+                if (file_exists($produk->gambar)) {
+                    unlink($produk->gambar);
+                    // return response()->json([
+                    //     'success' => true,
+                    //     'message' => 'Gambar tersedia ' . $produk->gambar,
+                    // ]);
+                }
+
                 DB::beginTransaction();
                 $produk->delete();
                 DB::commit();
