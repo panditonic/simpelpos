@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Kategori;
 use App\Models\Merek;
+use App\Models\Pelanggan;
 use App\Models\Produk;
 use Illuminate\Database\Seeder;
 
@@ -25,6 +26,7 @@ class DatabaseSeeder extends Seeder
 
         // Kategori::factory()->count(10)->create();
         // Merek::factory()->count(10)->create();
-        Produk::factory()->count(50)->create();
+        // Produk::factory()->count(50)->create();
+        Pelanggan::factory()->count(650)->create();
     }
 }

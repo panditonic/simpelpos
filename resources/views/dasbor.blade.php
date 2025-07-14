@@ -15,7 +15,7 @@
 
     @stack('styles')
 
-    <link rel="stylesheet" href="default.css">    
+    <link rel="stylesheet" href="{{ asset('default.css') }}">    
 </head>
 
 <body>
@@ -83,7 +83,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="/pelanggans">
                     <i class="fas fa-users"></i>
                     <span>Pelanggan</span>
                 </a>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DasborController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\ProdukController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,7 @@ Route::get('login',[LoginController::class, 'index']);
 Route::get('dasbor',[DasborController::class, 'index']);
 // Route to fetch categories and brands for select inputs
 Route::get('/produks/categories-brands', [ProdukController::class, 'getCategoriesAndBrands'])->name('produks.getCategoriesAndBrands');
+
 Route::get('/produks/datatable', [ProdukController::class, 'datatable'])->name('produks.datatable');
 Route::post('/produks/{id}', [ProdukController::class, 'update'])->name('produks.update');
 Route::resource('produks', ProdukController::class)->names([
@@ -28,9 +30,12 @@ Route::resource('produks', ProdukController::class)->names([
     'store' => 'produks.store',
     'show' => 'produks.show',
     'edit' => 'produks.edit',
-    // 'update' => 'produks.update',
+    // 'update' => 'produks.update', // bagian ini methode PUT tidak bekerja
     'destroy' => 'produks.destroy',
 ]);
+
+Route::get('pelanggans/datatable', [PelangganController::class, 'datatable'])->name('pelanggans.datatable');
+Route::resource('pelanggans', PelangganController::class);
 
 Route::get('/', function () {
     // return view('welcome');
