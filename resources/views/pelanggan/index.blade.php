@@ -14,7 +14,7 @@
         <div class="card-body">
             <div class="row mb-3">
                 <div class="col-md-3">
-                    <label for="columnVisibilityControl">Tampilkan/Sembunyikan Kolom:</label>
+                    <label for="columnVisibilityControl">Kolom:</label>
                     <select id="columnVisibilityControl" class="form-select" multiple>
                         <option value="0">ID</option>
                         <option value="1">Nama</option>
@@ -54,6 +54,9 @@
                 <th>Nama</th>
                 <th>Email</th>
                 <th>Telepon</th>
+                <th>Jenis Kelamin</th>
+                <th>Pekerjaan</th>
+                <th>No KTP</th>
                 <th>Status</th>
                 <th>Aksi</th>
             </tr>
@@ -67,17 +70,14 @@
 <!-- DataTables CSS with Bootstrap 5 integration -->
 <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 <link href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.bootstrap5.min.css" rel="stylesheet">
-<link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.bootstrap5.min.css" rel="stylesheet">
 
 <!-- Select2 for better multi-select experience -->
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <!-- DataTables JS with Bootstrap 5 and Responsive extensions -->
 <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.bootstrap5.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <style>
 /* Ensure DataTable wrapper and table are full-width */
@@ -89,6 +89,55 @@
 }
 .dataTables_scrollBody {
     width: 100% !important;
+}
+
+/* Prevent text wrapping and truncation in table cells */
+#pelangganTable td, #pelangganTable th {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+/* Specific styling for action column */
+#pelangganTable td:last-child {
+    min-width: 120px; /* Minimum width for action buttons */
+    max-width: 200px; /* Maximum width for action buttons */
+}
+
+/* Inline action buttons styling */
+.action-buttons {
+    display: inline-flex !important;
+    gap: 5px !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+}
+
+.action-buttons .btn {
+    padding: 2px 8px !important;
+    font-size: 12px !important;
+    line-height: 1.2 !important;
+    border-radius: 3px !important;
+    margin: 0 !important;
+    display: inline-block !important;
+}
+
+/* Ensure status badges are inline */
+.status-badge {
+    display: inline-block !important;
+    padding: 2px 8px !important;
+    font-size: 11px !important;
+    border-radius: 12px !important;
+}
+
+/* Remove fixed row height to allow content to dictate height */
+#pelangganTable tbody tr {
+    height: auto !important;
+}
+.select2 {
+    width: 100% !important;
+}
+.select2-container {
+    display: inline !important;
 }
 </style>
 
@@ -105,8 +154,35 @@
         var table = $('#pelangganTable').DataTable({
             processing: true,
             serverSide: true,
-            responsive: true,
+            responsive: false, // Disable responsive to maintain single line
             autoWidth: false,
+            pageLength: 10,
+            lengthMenu: [
+                [10, 25, 50, 100],
+                [10, 25, 50, 100]
+            ],
+            dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>' +
+                '<"row"<"col-sm-12"tr>>' +
+                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+            language: {
+                processing: "Memproses...",
+                lengthMenu: "Tampilkan _MENU_ data per halaman",
+                zeroRecords: "Data tidak ditemukan",
+                info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                infoEmpty: "Menampilkan 0 sampai 0 dari 0 data",
+                infoFiltered: "(disaring dari _MAX_ total data)",
+                search: "Cari:",
+                paginate: {
+                    first: "Pertama",
+                    last: "Terakhir",
+                    next: "Selanjutnya",
+                    previous: "Sebelumnya"
+                }
+            },
+            fixedHeader: true,
+            scrollX: true,
+            scrollCollapse: true,
+            fixedColumns: true,
             ajax: {
                 url: '{{ route("pelanggans.datatable") }}',
                 data: function(d) {
@@ -116,22 +192,57 @@
                 }
             },
             columns: [
-                { data: 'id', name: 'id' },
-                { data: 'nama', name: 'nama' },
-                { data: 'email', name: 'email' },
-                { data: 'telepon', name: 'telepon' },
-                { data: 'status_aktif', name: 'status_aktif' },
+                { data: 'id', name: 'id', width: '50px' },
+                { data: 'nama', name: 'nama', width: '150px' },
+                { data: 'email', name: 'email', width: '180px' },
+                { data: 'telepon', name: 'telepon', width: '120px' },
+                { data: 'jenis_kelamin', name: 'jenis_kelamin', width: '80px' },
+                { data: 'pekerjaan', name: 'pekerjaan', width: '120px' },
+                { data: 'no_ktp', name: 'no_ktp', width: '130px' },
+                { 
+                    data: 'status_aktif', 
+                    name: 'status_aktif', 
+                    width: '80px',
+                    render: function(data, type, row) {
+                        if (data == 1) {
+                            return '<span class="badge bg-success status-badge">Aktif</span>';
+                        } else {
+                            return '<span class="badge bg-danger status-badge">Tidak Aktif</span>';
+                        }
+                    }
+                },
                 { 
                     data: 'action', 
                     name: 'action', 
                     orderable: false, 
-                    searchable: false 
+                    searchable: false,
+                    width: '150px',
+                    render: function(data, type, row) {
+                        return `
+                            <div class="action-buttons">
+                                <a href="/pelanggans/${row.id}" class="btn btn-info btn-sm" title="Lihat">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a href="/pelanggans/${row.id}/edit" class="btn btn-warning btn-sm" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <button class="btn btn-danger btn-sm" onclick="confirmDelete(${row.id})" title="Hapus">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        `;
+                    }
                 }
             ],
             columnDefs: [
                 {
                     targets: '_all',
-                    visible: true // All columns visible by default
+                    visible: true,
+                    // className: 'text-center'
+                },
+                {
+                    targets: [1, 2, 4, 5], // Nama, Email, Jenis Kelamin, Pekerjaan
+                    className: 'text-left'
                 }
             ]
         });
@@ -144,7 +255,7 @@
             if (selectedColumns.length > 0) {
                 // Hide all columns except Action column
                 table.columns().visible(false);
-                table.column(5).visible(true); // Ensure Action column is always visible
+                table.column(8).visible(true); // Ensure Action column is always visible
 
                 // Show selected columns
                 selectedColumns.forEach(function(colIdx) {
@@ -181,5 +292,30 @@
             table.columns.adjust().draw(false);
         });
     });
+
+    // Function to confirm delete action
+    function confirmDelete(id) {
+        if (confirm('Apakah Anda yakin ingin menghapus pelanggan ini?')) {
+            // Create form and submit
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/pelanggans/' + id;
+            
+            var methodInput = document.createElement('input');
+            methodInput.type = 'hidden';
+            methodInput.name = '_method';
+            methodInput.value = 'DELETE';
+            
+            var tokenInput = document.createElement('input');
+            tokenInput.type = 'hidden';
+            tokenInput.name = '_token';
+            tokenInput.value = '{{ csrf_token() }}';
+            
+            form.appendChild(methodInput);
+            form.appendChild(tokenInput);
+            document.body.appendChild(form);
+            form.submit();
+        }
+    }
 </script>
 @endpush

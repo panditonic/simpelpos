@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('alamat')->nullable();
             $table->enum('jenis_kelamin', ['L', 'P'])->nullable();
             $table->date('tanggal_lahir')->nullable();
-            $table->string('pekerjaan', 50)->nullable();
+            $table->string('pekerjaan', 100)->nullable();
             $table->string('no_ktp', 20)->unique()->nullable();
             $table->boolean('status_aktif')->default(true);
             $table->timestamps();

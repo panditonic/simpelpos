@@ -113,24 +113,24 @@
                             <thead class="table-dark">
                                 <tr>
                                     <th class="text-center">No</th>
-                                    <th class="d-none d-md-table-cell">Gambar</th>
+                                    <th class="">Gambar</th>
                                     <th>Nama</th>
-                                    <th class="d-none d-md-table-cell">Slug</th>
+                                    <th class="">Slug</th>
                                     <th>Deskripsi</th>
                                     <th>Harga Jual</th>
-                                    <th class="d-none d-lg-table-cell">Harga Modal</th>
+                                    <th class="">Harga Modal</th>
                                     <th>Stok</th>
-                                    <th class="d-none d-md-table-cell">Kode SKU</th>
-                                    <th class="d-none d-xl-table-cell">Barcode</th>
-                                    <th class="d-none d-lg-table-cell">Kategori</th>
-                                    <th class="d-none d-xl-table-cell">Merek</th>
-                                    <th class="d-none d-xl-table-cell">Satuan</th>
-                                    <th class="d-none d-xl-table-cell">Berat</th>
-                                    <th class="d-none d-xl-table-cell">Dimensi</th>
+                                    <th class="">Kode SKU</th>
+                                    <th class="">Barcode</th>
+                                    <th class="">Kategori</th>
+                                    <th class="">Merek</th>
+                                    <th class="">Satuan</th>
+                                    <th class="">Berat</th>
+                                    <th class="">Dimensi</th>
                                     <th>Status</th>
-                                    <th class="d-none d-lg-table-cell">Stok Min</th>
-                                    <th class="d-none d-xl-table-cell">Dibuat</th>
-                                    <th class="d-none d-xl-table-cell">Diperbarui</th>
+                                    <th class="">Stok Min</th>
+                                    <th class="">Dibuat</th>
+                                    <th class="">Diperbarui</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>

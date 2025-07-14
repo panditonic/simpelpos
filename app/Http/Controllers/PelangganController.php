@@ -23,7 +23,7 @@ class PelangganController extends Controller
     public function datatable(Request $request)
     {
         if ($request->ajax()) {
-            $data = Pelanggan::query()->select(['id', 'nama', 'email', 'telepon', 'status_aktif']);
+            $data = Pelanggan::query()->select(["*"]);
             
             if ($request->has('nama')) {
                 $data->where('nama', 'like', '%' . $request->input('nama') . '%');
@@ -42,16 +42,16 @@ class PelangganController extends Controller
                     $editUrl = route('pelanggans.edit', $row->id);
                     $deleteUrl = route('pelanggans.destroy', $row->id);
                     return '
-                        <a href="' . $editUrl . '" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="' . $editUrl . '" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
                         <form action="' . $deleteUrl . '" method="POST" style="display:inline;" onsubmit="return confirm(\'Are you sure?\');">
                             ' . csrf_field() . '
                             ' . method_field('DELETE') . '
-                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                         </form>
                     ';
                 })
                 ->editColumn('status_aktif', function ($row) {
-                    return $row->status_aktif ? 'Aktif' : 'Non-Aktif';
+                    return $row->status_aktif;
                 })
                 ->rawColumns(['action'])
                 ->make(true);

@@ -17,5 +17,7 @@ responsive tampilannya.
 ![analitik](/docs/analitik.png)
 4. crud enrichment
 ![analitik](/docs/crudenrichment.png)
-4. crud customfilter
+5. crud customfilter
 ![analitik](/docs/crudcustomfilter.png)
+6. crud customfilternonspa
+![analitik](/docs/crudcustomfilternospa.png)
