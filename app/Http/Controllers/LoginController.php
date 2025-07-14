@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
@@ -46,6 +48,11 @@ class LoginController extends Controller
             $request->session()->regenerate();
             
             $user = Auth::user();
+            
+            // update last login
+            $model = User::find($user->id);
+            $model->last_login = Carbon::now();
+            $model->save();
             
             return response()->json([
                 'success' => true,

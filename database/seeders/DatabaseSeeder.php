@@ -27,6 +27,6 @@ class DatabaseSeeder extends Seeder
         Kategori::factory()->count(10)->create();
         Merek::factory()->count(10)->create();
         Produk::factory()->count(50)->create();
-        Pelanggan::factory()->count(650)->create();
+        Pelanggan::factory()->count(50)->create();
     }
 }

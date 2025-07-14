@@ -45,8 +45,8 @@
                         <span id="userAktif">User Aktif</span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profile</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                        <li><a class="dropdown-item" href="/profile"><i class="fas fa-user me-2"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="/settings"><i class="fas fa-cog me-2"></i>Settings</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
@@ -110,12 +110,12 @@
                     <span>Transaksi</span>
                 </a>
             </li> -->
-            <li>
+            <!-- <li>
                 <a href="#">
                     <i class="fas fa-cog"></i>
                     <span>Pengaturan</span>
                 </a>
-            </li>
+            </li> -->
         </ul>
     </nav>
 

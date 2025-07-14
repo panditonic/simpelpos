@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('login',[LoginController::class, 'index']);
-Route::get('dasbor',[DasborController::class, 'index']);
+Route::get('dasbor',[DasborController::class, 'index'])->name('dasbor');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 // Authentication Routes
@@ -51,6 +51,17 @@ Route::resource('produks', ProdukController::class)->names([
 
 Route::get('pelanggans/datatable', [PelangganController::class, 'datatable'])->name('pelanggans.datatable');
 Route::resource('pelanggans', PelangganController::class);
+
+// Profile routes
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [DasborController::class, 'profile'])->name('profile');
+    Route::put('/profile', [DasborController::class, 'updateProfile'])->name('profile.update');
+    
+    // Settings routes
+    Route::get('/settings', [DasborController::class, 'settings'])->name('settings');
+    Route::put('/settings/password', [DasborController::class, 'updatePassword'])->name('settings.password');
+    Route::put('/settings/notifications', [DasborController::class, 'updateNotificationSettings'])->name('settings.notifications');
+});
 
 Route::get('/', function () {
     // return view('welcome');
