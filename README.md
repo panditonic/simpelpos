@@ -22,3 +22,5 @@ responsive tampilannya.
 ![analitik](/docs/crudcustomfilter.png)
 6. crud customfilternonspa
 ![analitik](/docs/crudcustomfilternospa.png)
+- penjualan
+![analitik](/docs/tpenjualan.png)
