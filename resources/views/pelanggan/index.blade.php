@@ -1,9 +1,40 @@
 @extends('dasbor')
 
 @section('content')
+
+
 <div class="container-fluid">
-    <h1>Daftar Pelanggan</h1>
-    <a href="{{ route('pelanggans.create') }}" class="btn btn-success mb-3">Tambah Pelanggan</a>
+
+    <style>
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .header-container h1 {
+            font-size: 1.5rem;
+            /* Ukuran judul lebih kecil */
+            margin: 0;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 0.5rem;
+            /* Jarak antar tombol */
+        }
+    </style>
+    <div class="header-container">
+        <h1>Daftar Pelanggan</h1>
+        <div class="button-group">
+            <a href="{{ route('pelanggans.create') }}" class="btn btn-success btn-sm">Tambah Pelanggan</a>
+            <a href="#" class="btn btn-primary btn-sm">Lihat Laporan</a>
+            <a href="#" class="btn btn-secondary btn-sm">Ekspor Data</a>
+        </div>
+    </div>
+    <!-- Konten lainnya -->
+
     @if (session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
     @endif
@@ -80,65 +111,72 @@
 <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
 
 <style>
-/* Ensure DataTable wrapper and table are full-width */
-#pelangganTable_wrapper {
-    width: 100% !important;
-}
-#pelangganTable {
-    width: 100% !important;
-}
-.dataTables_scrollBody {
-    width: 100% !important;
-}
+    /* Ensure DataTable wrapper and table are full-width */
+    #pelangganTable_wrapper {
+        width: 100% !important;
+    }
 
-/* Prevent text wrapping and truncation in table cells */
-#pelangganTable td, #pelangganTable th {
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-}
+    #pelangganTable {
+        width: 100% !important;
+    }
 
-/* Specific styling for action column */
-#pelangganTable td:last-child {
-    min-width: 120px; /* Minimum width for action buttons */
-    max-width: 200px; /* Maximum width for action buttons */
-}
+    .dataTables_scrollBody {
+        width: 100% !important;
+    }
 
-/* Inline action buttons styling */
-.action-buttons {
-    display: inline-flex !important;
-    gap: 5px !important;
-    align-items: center !important;
-    flex-wrap: nowrap !important;
-}
+    /* Prevent text wrapping and truncation in table cells */
+    #pelangganTable td,
+    #pelangganTable th {
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
 
-.action-buttons .btn {
-    padding: 2px 8px !important;
-    font-size: 12px !important;
-    line-height: 1.2 !important;
-    border-radius: 3px !important;
-    margin: 0 !important;
-    display: inline-block !important;
-}
+    /* Specific styling for action column */
+    #pelangganTable td:last-child {
+        min-width: 120px;
+        /* Minimum width for action buttons */
+        max-width: 200px;
+        /* Maximum width for action buttons */
+    }
 
-/* Ensure status badges are inline */
-.status-badge {
-    display: inline-block !important;
-    padding: 2px 8px !important;
-    font-size: 11px !important;
-    border-radius: 12px !important;
-}
+    /* Inline action buttons styling */
+    .action-buttons {
+        display: inline-flex !important;
+        gap: 5px !important;
+        align-items: center !important;
+        flex-wrap: nowrap !important;
+    }
 
-/* Remove fixed row height to allow content to dictate height */
-#pelangganTable tbody tr {
-    height: auto !important;
-}
-.select2 {
-    width: 100% !important;
-}
-.select2-container {
-    display: inline !important;
-}
+    .action-buttons .btn {
+        padding: 2px 8px !important;
+        font-size: 12px !important;
+        line-height: 1.2 !important;
+        border-radius: 3px !important;
+        margin: 0 !important;
+        display: inline-block !important;
+    }
+
+    /* Ensure status badges are inline */
+    .status-badge {
+        display: inline-block !important;
+        padding: 2px 8px !important;
+        font-size: 11px !important;
+        border-radius: 12px !important;
+    }
+
+    /* Remove fixed row height to allow content to dictate height */
+    #pelangganTable tbody tr {
+        height: auto !important;
+    }
+
+    .select2 {
+        width: 100% !important;
+    }
+
+    .select2-container {
+        display: inline !important;
+    }
 </style>
 
 <script>
@@ -191,17 +229,44 @@
                     d.status_aktif = $('#filterStatus').val();
                 }
             },
-            columns: [
-                { data: 'id', name: 'id', width: '50px' },
-                { data: 'nama', name: 'nama', width: '150px' },
-                { data: 'email', name: 'email', width: '180px' },
-                { data: 'telepon', name: 'telepon', width: '120px' },
-                { data: 'jenis_kelamin', name: 'jenis_kelamin', width: '80px' },
-                { data: 'pekerjaan', name: 'pekerjaan', width: '120px' },
-                { data: 'no_ktp', name: 'no_ktp', width: '130px' },
-                { 
-                    data: 'status_aktif', 
-                    name: 'status_aktif', 
+            columns: [{
+                    data: 'id',
+                    name: 'id',
+                    width: '50px'
+                },
+                {
+                    data: 'nama',
+                    name: 'nama',
+                    width: '150px'
+                },
+                {
+                    data: 'email',
+                    name: 'email',
+                    width: '180px'
+                },
+                {
+                    data: 'telepon',
+                    name: 'telepon',
+                    width: '120px'
+                },
+                {
+                    data: 'jenis_kelamin',
+                    name: 'jenis_kelamin',
+                    width: '80px'
+                },
+                {
+                    data: 'pekerjaan',
+                    name: 'pekerjaan',
+                    width: '120px'
+                },
+                {
+                    data: 'no_ktp',
+                    name: 'no_ktp',
+                    width: '130px'
+                },
+                {
+                    data: 'status_aktif',
+                    name: 'status_aktif',
                     width: '80px',
                     render: function(data, type, row) {
                         if (data == 1) {
@@ -211,10 +276,10 @@
                         }
                     }
                 },
-                { 
-                    data: 'action', 
-                    name: 'action', 
-                    orderable: false, 
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
                     searchable: false,
                     width: '150px',
                     render: function(data, type, row) {
@@ -234,8 +299,7 @@
                     }
                 }
             ],
-            columnDefs: [
-                {
+            columnDefs: [{
                     targets: '_all',
                     visible: true,
                     // className: 'text-center'
@@ -300,17 +364,17 @@
             var form = document.createElement('form');
             form.method = 'POST';
             form.action = '/pelanggans/' + id;
-            
+
             var methodInput = document.createElement('input');
             methodInput.type = 'hidden';
             methodInput.name = '_method';
             methodInput.value = 'DELETE';
-            
+
             var tokenInput = document.createElement('input');
             tokenInput.type = 'hidden';
             tokenInput.name = '_token';
             tokenInput.value = '{{ csrf_token() }}';
-            
+
             form.appendChild(methodInput);
             form.appendChild(tokenInput);
             document.body.appendChild(form);

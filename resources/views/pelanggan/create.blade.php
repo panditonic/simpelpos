@@ -2,7 +2,35 @@
 
 @section('content')
 <div class="container-fluid">
-    <h1>Tambah Pelanggan</h1>
+
+    <style>
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .header-container h1 {
+            font-size: 1.5rem;
+            /* Ukuran judul lebih kecil */
+            margin: 0;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 0.5rem;
+            /* Jarak antar tombol */
+        }
+    </style>
+    <div class="header-container">
+        <h1>Daftar Pelanggan</h1>
+        <div class="button-group">
+            <a href="{{ route('pelanggans.index') }}" class="btn btn-success btn-sm">Kembali</a>
+        </div>
+    </div>
+    <!-- Konten lainnya -->
+
     @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
