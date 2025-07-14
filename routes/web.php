@@ -3,6 +3,7 @@
 use App\Http\Controllers\DasborController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProdukController;
 use Illuminate\Support\Facades\Route;
 
@@ -62,6 +63,17 @@ Route::middleware('auth')->group(function () {
     Route::put('/settings/password', [DasborController::class, 'updatePassword'])->name('settings.password');
     Route::put('/settings/notifications', [DasborController::class, 'updateNotificationSettings'])->name('settings.notifications');
 });
+
+Route::resource('penjualans', \App\Http\Controllers\PenjualanController::class);
+Route::resource('penjualans', PenjualanController::class)->names([
+    'index' => 'penjualans.index',
+    'create' => 'penjualans.create',
+    'store' => 'penjualans.store',
+    'show' => 'penjualans.show',
+    'edit' => 'penjualans.edit',
+    // 'update' => 'penjualans.update', // bagian ini methode PUT tidak bekerja
+    'destroy' => 'penjualans.destroy',
+]);
 
 Route::get('/', function () {
     // return view('welcome');

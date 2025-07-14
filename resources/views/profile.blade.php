@@ -91,7 +91,7 @@
                             <div class="col-md-6">
                                 <label class="form-label">Terakhir Update</label>
                                 <input type="text" class="form-control" 
-                                       value="{{ $user->updated_at->format('d F Y H:i') }}" readonly>
+                                       value="{{ $user->updated_at->format('d F Y H:i:s') }}" readonly>
                             </div>
                         </div>
 

@@ -143,8 +143,11 @@
                             <p><strong>Status:</strong>
                                 <span class="badge bg-success">Aktif</span>
                             </p>
+                            <p><strong>Terakhir Update:</strong>
+                                {{ auth()->user()->last_login ? auth()->user()->updated_at->format('d F Y H:i:s') : 'Belum pernah login' }}
+                            </p>
                             <p><strong>Terakhir Login:</strong>
-                                {{ auth()->user()->last_login ? auth()->user()->last_login->format('d F Y H:i') : 'Belum pernah login' }}
+                                {{ auth()->user()->last_login ? auth()->user()->last_login->format('d F Y H:i:s') : 'Belum pernah login' }}
                             </p>
                         </div>
                     </div>

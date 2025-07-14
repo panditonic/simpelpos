@@ -1,8 +1,6 @@
 @extends('dasbor')
 
 @section('content')
-
-
 <div class="container-fluid">
 
     <style>

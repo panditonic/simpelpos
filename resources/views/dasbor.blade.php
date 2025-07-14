@@ -75,7 +75,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="/penjualans">
                     <i class="fas fa-shopping-cart"></i>
                     <span>Penjualan</span>
                 </a>
@@ -234,7 +234,7 @@
                     hour: '2-digit',
                     minute: '2-digit',
                     second: '2-digit',
-                    timeZone: 'Asia/Jayapura'
+                    // timeZone: 'Asia/Jayapura'
                 };
 
                 const indonesianDateTime = new Intl.DateTimeFormat('id-ID', options).format(now);
