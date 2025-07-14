@@ -113,6 +113,7 @@
                             <thead class="table-dark">
                                 <tr>
                                     <th class="text-center">No</th>
+                                    <th class="d-none d-md-table-cell">Gambar</th>
                                     <th>Nama</th>
                                     <th class="d-none d-md-table-cell">Slug</th>
                                     <th>Deskripsi</th>
@@ -128,7 +129,6 @@
                                     <th class="d-none d-xl-table-cell">Dimensi</th>
                                     <th>Status</th>
                                     <th class="d-none d-lg-table-cell">Stok Min</th>
-                                    <th class="d-none d-md-table-cell">Gambar</th>
                                     <th class="d-none d-xl-table-cell">Dibuat</th>
                                     <th class="d-none d-xl-table-cell">Diperbarui</th>
                                     <th class="text-center">Aksi</th>
@@ -495,6 +495,16 @@
                     }
                 },
                 {
+                    data: 'gambar',
+                    name: 'gambar',
+                    orderable: false,
+                    searchable: false,
+                    className: 'text-center',
+                    render: function(data, type, row) {
+                        return '<img src="' + data + '" alt="' + row.id + '" class="img-thumbnail" style="width: 40px; height: 40px; object-fit: cover;">';
+                    }
+                },
+                {
                     data: 'nama',
                     name: 'nama'
                 },
@@ -601,16 +611,7 @@
                     name: 'stok_minimum',
                     className: 'text-center'
                 },
-                {
-                    data: 'gambar',
-                    name: 'gambar',
-                    orderable: false,
-                    searchable: false,
-                    className: 'text-center',
-                    render: function(data, type, row) {
-                        return '<img src="' + data + '" alt="' + row.nama + '" class="img-thumbnail" style="width: 40px; height: 40px; object-fit: cover;">';
-                    }
-                },
+
                 {
                     data: 'created_at',
                     name: 'created_at',
@@ -895,9 +896,9 @@
     function setupColumnVisibility(table) {
         var columnToggles = $('#columnToggles');
         var columnNames = [
-            'No', 'Nama', 'Slug', 'Deskripsi', 'Harga Jual', 'Harga Modal',
+            'No', 'Gambar', 'Nama', 'Slug', 'Deskripsi', 'Harga Jual', 'Harga Modal',
             'Stok', 'Kode SKU', 'Barcode', 'Kategori', 'Merek', 'Satuan',
-            'Berat', 'Dimensi', 'Status', 'Stok Min', 'Gambar', 'Dibuat', 'Diperbarui', 'Aksi'
+            'Berat', 'Dimensi', 'Status', 'Stok Min', 'Dibuat', 'Diperbarui', 'Aksi'
         ];
 
         columnToggles.empty();
