@@ -57,12 +57,13 @@ class LoginController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => 'Login successful',
-                'user' => [
-                    'id' => $user->id,
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'email_verified_at' => $user->email_verified_at,
-                ]
+                // 'user' => [
+                //     'id' => $user->id,
+                //     'name' => $user->name,
+                //     'email' => $user->email,
+                //     'email_verified_at' => $user->email_verified_at,
+                // ]
+                'user' => $user
             ]);
         }
 
@@ -153,15 +154,16 @@ class LoginController extends Controller
         
         return response()->json([
             'success' => true,
-            'user' => [
-                'id' => $user->id,
-                'name' => $user->name,
-                'email' => $user->email,
-                'email_verified_at' => $user->email_verified_at,
-                'created_at' => $user->created_at,
-                'last_login_at' => $user->last_login_at,
-                'last_login_ip' => $user->last_login_ip,
-            ]
+            // 'user' => [
+            //     'id' => $user->id,
+            //     'name' => $user->name,
+            //     'email' => $user->email,
+            //     'email_verified_at' => $user->email_verified_at,
+            //     'created_at' => $user->created_at,
+            //     'last_login_at' => $user->last_login_at,
+            //     'last_login_ip' => $user->last_login_ip,
+            // ]
+            'user' => $user
         ]);
     }
 }

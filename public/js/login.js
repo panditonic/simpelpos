@@ -42,8 +42,8 @@ function checkSession() {
     .then(response => response.json())
     .then(data => {
         if (data.authenticated) {
-            window.location.href = "/dasbor";
             // showDashboard(data.user);
+            window.location.href = "/dasbor";
         }
     })
     .catch(error => {
