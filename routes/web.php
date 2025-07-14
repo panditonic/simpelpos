@@ -19,6 +19,21 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('login',[LoginController::class, 'index']);
 Route::get('dasbor',[DasborController::class, 'index']);
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+// Authentication Routes
+Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login'])->name('login.post');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/check-auth', [LoginController::class, 'checkAuth'])->name('check.auth');
+Route::post('/forgot-password', [LoginController::class, 'forgotPassword'])->name('forgot.password');
+
+// Protected Routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [LoginController::class, 'dashboard'])->name('dashboard');
+});
+
 // Route to fetch categories and brands for select inputs
 Route::get('/produks/categories-brands', [ProdukController::class, 'getCategoriesAndBrands'])->name('produks.getCategoriesAndBrands');
 

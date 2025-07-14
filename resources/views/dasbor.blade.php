@@ -15,7 +15,7 @@
 
     @stack('styles')
 
-    <link rel="stylesheet" href="{{ asset('default.css') }}">    
+    <link rel="stylesheet" href="{{ asset('default.css') }}">
 </head>
 
 <body>
@@ -42,7 +42,7 @@
                 <div class="dropdown">
                     <button class="btn btn-link text-white dropdown-toggle" type="button" data-bs-toggle="dropdown">
                         <i class="fas fa-user-circle me-2"></i>
-                        Admin
+                        <span id="userAktif">User Aktif</span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profile</a></li>
@@ -50,7 +50,12 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                        <li>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="dropdown-item"><i class="fas fa-sign-out-alt me-2"></i>Logout</button>
+                            </form>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -94,18 +99,18 @@
                     <span>Laporan</span>
                 </a>
             </li>
-            <li>
+            <!-- <li>
                 <a href="#">
                     <i class="fas fa-warehouse"></i>
                     <span>Inventaris</span>
                 </a>
-            </li>
-            <li>
+            </li> -->
+            <!-- <li>
                 <a href="#">
                     <i class="fas fa-receipt"></i>
                     <span>Transaksi</span>
                 </a>
-            </li>
+            </li> -->
             <li>
                 <a href="#">
                     <i class="fas fa-cog"></i>
@@ -129,6 +134,32 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
         <script>
+            // Get CSRF token from meta tag
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+            // Session management
+            function checkSession() {
+                fetch('/check-auth', {
+                        method: 'GET',
+                        headers: {
+                            'X-CSRF-TOKEN': csrfToken,
+                            'Accept': 'application/json',
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        $('#userAktif').text(data.user.name)
+                    })
+                    .catch(error => {
+                        console.error('Error checking session:', error);
+                    });
+            }
+
+            // Check for existing session on page load
+            document.addEventListener('DOMContentLoaded', function() {
+                checkSession();
+            });
+
             // Enhanced Toggle Sidebar with responsive support
             document.getElementById('toggleSidebar').addEventListener('click', function() {
                 const sidebar = document.getElementById('sidebar');

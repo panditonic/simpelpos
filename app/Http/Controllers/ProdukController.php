@@ -13,6 +13,11 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ProdukController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function datatable(Request $request)
     {
         if ($request->ajax()) {
