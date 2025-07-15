@@ -1,402 +1,321 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Laravel Login Form</title>
-    
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- SweetAlert2 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    
-    <style>
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        .login-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: none;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-        
-        .login-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
-            padding: 2rem;
-        }
-        
-        .login-header h2 {
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-        
-        .login-header p {
-            opacity: 0.9;
-            margin-bottom: 0;
-        }
-        
-        .form-control {
-            border-radius: 10px;
-            border: 2px solid #e9ecef;
-            padding: 0.75rem 1rem;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-        
-        .form-control:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
-        }
-        
-        .input-group-text {
-            background: #f8f9fa;
-            border: 2px solid #e9ecef;
-            border-radius: 10px 0 0 10px;
-            border-right: none;
-        }
-        
-        .input-group .form-control {
-            border-left: none;
-            border-radius: 0 10px 10px 0;
-        }
-        
-        .btn-login {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            border-radius: 10px;
-            padding: 0.75rem 2rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn-login:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-        }
-        
-        .btn-login:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
-        
-        .spinner-border-sm {
-            width: 1rem;
-            height: 1rem;
-        }
-        
-        .form-check-input:checked {
-            background-color: #667eea;
-            border-color: #667eea;
-        }
-        
-        .forgot-password {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-        
-        .forgot-password:hover {
-            color: #764ba2;
-        }
-        
-        .signup-link {
-            text-align: center;
-            margin-top: 1.5rem;
-            color: #6c757d;
-        }
-        
-        .signup-link a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        
-        .signup-link a:hover {
-            color: #764ba2;
-        }
-        
-        .dashboard-container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
-            text-align: center;
-        }
-        
-        .dashboard-header h2 {
-            color: #333;
-            margin-bottom: 1rem;
-        }
-        
-        .btn-logout {
-            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
-            border: none;
-            border-radius: 10px;
-            padding: 0.75rem 2rem;
-            color: white;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-logout:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(220, 53, 69, 0.3);
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-5">
-                <!-- Login Form -->
-                <div class="login-container" id="loginContainer">
-                    <div class="card login-card">
-                        <div class="login-header">
-                            <h2><i class="fas fa-sign-in-alt me-2"></i>Welcome Back</h2>
-                            <p>Please sign in to your account</p>
-                        </div>
-                        
-                        <div class="card-body p-4">
-                            <form id="loginForm">
-                                @csrf
-                                <div class="mb-3">
-                                    <label for="email" class="form-label fw-semibold">Email Address</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-envelope"></i>
-                                        </span>
-                                        <input type="email" class="form-control" id="email" name="email" 
-                                               placeholder="Enter your email" required>
-                                    </div>
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <label for="password" class="form-label fw-semibold">Password</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-lock"></i>
-                                        </span>
-                                        <input type="password" class="form-control" id="password" name="password" 
-                                               placeholder="Enter your password" required>
-                                        <button class="btn btn-outline-secondary" type="button" id="togglePassword">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                
-                                <div class="d-flex justify-content-between align-items-center mb-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="remember" name="remember">
-                                        <label class="form-check-label" for="remember">
-                                            Remember me
-                                        </label>
-                                    </div>
-                                    <a href="#" class="forgot-password">Forgot Password?</a>
-                                </div>
-                                
-                                <button type="submit" class="btn btn-login w-100 text-white" id="loginBtn">
-                                    <span class="spinner-border spinner-border-sm me-2 d-none" id="loginSpinner"></span>
-                                    <span class="btn-text">Sign In</span>
-                                </button>
-                                
-                                <div class="signup-link">
-                                    Don't have an account? <a href="#">Sign up here</a>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Dashboard -->
-                <div class="dashboard-container" id="dashboardContainer" style="display: none;">
-                    <div class="dashboard-header">
-                        <h2><i class="fas fa-tachometer-alt me-2"></i>Dashboard</h2>
-                        <p class="mb-4">Welcome, <span id="userName" class="fw-bold text-primary"></span>!</p>
-                    </div>
-                    <div class="dashboard-content">
-                        <div class="alert alert-info" role="alert">
-                            <i class="fas fa-info-circle me-2"></i>
-                            This is your personal dashboard. You can view your account details and manage your settings here.
-                        </div>
-                        <button class="btn btn-logout" id="logoutBtn">
-                            <i class="fas fa-sign-out-alt me-2"></i>Sign Out
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<?php //00363
+// IONCUBE ENCODER 14.0 EVALUATION
+// THIS LICENSE MESSAGE IS ONLY ADDED BY THE EVALUATION ENCODER AND
+// IS NOT PRESENT IN PRODUCTION ENCODED FILES
 
-    <!-- Bootstrap 5 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- SweetAlert2 -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-    <script>
-        $(document).ready(function() {
-            // Toggle password visibility
-            $('#togglePassword').click(function() {
-                const passwordField = $('#password');
-                const icon = $(this).find('i');
-                
-                if (passwordField.attr('type') === 'password') {
-                    passwordField.attr('type', 'text');
-                    icon.removeClass('fa-eye').addClass('fa-eye-slash');
-                } else {
-                    passwordField.attr('type', 'password');
-                    icon.removeClass('fa-eye-slash').addClass('fa-eye');
-                }
-            });
-            
-            // Handle form submission
-            $('#loginForm').submit(function(e) {
-                e.preventDefault();
-                
-                const loginBtn = $('#loginBtn');
-                const loginSpinner = $('#loginSpinner');
-                const formData = new FormData(this);
-                
-                // Show loading state
-                loginBtn.prop('disabled', true);
-                loginSpinner.removeClass('d-none');
-                
-                $.ajax({
-                    url: '/login', // Sesuaikan dengan route Laravel Anda
-                    method: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function(response) {
-                        // Hide loading state
-                        loginBtn.prop('disabled', false);
-                        loginSpinner.addClass('d-none');
-                        
-                        // Show success message
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Login Successful!',
-                            text: response.message || 'Welcome back!',
-                            showConfirmButton: false,
-                            timer: 2000,
-                            timerProgressBar: true
-                        }).then(() => {
-                            // Show dashboard or redirect
-                            if (response.redirect) {
-                                window.location.href = response.redirect;
-                            } else {
-                                $('#loginContainer').hide();
-                                $('#dashboardContainer').show();
-                                $('#userName').text(response.user.name || response.user.email);
-                            }
-                        });
-                    },
-                    error: function(xhr) {
-                        // Hide loading state
-                        loginBtn.prop('disabled', false);
-                        loginSpinner.addClass('d-none');
-                        
-                        let errorMessage = 'An error occurred during login.';
-                        let errors = {};
-                        
-                        if (xhr.responseJSON) {
-                            errorMessage = xhr.responseJSON.message || errorMessage;
-                            errors = xhr.responseJSON.errors || {};
-                        }
-                        
-                        // Show error message
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Login Failed',
-                            text: errorMessage,
-                            confirmButtonText: 'Try Again',
-                            confirmButtonColor: '#dc3545'
-                        });
-                        
-                        // Clear form errors
-                        $('.form-control').removeClass('is-invalid');
-                        $('.invalid-feedback').remove();
-                        
-                        // Show field-specific errors
-                        if (Object.keys(errors).length > 0) {
-                            Object.keys(errors).forEach(function(field) {
-                                const fieldElement = $(`#${field}`);
-                                fieldElement.addClass('is-invalid');
-                                fieldElement.after(`<div class="invalid-feedback">${errors[field][0]}</div>`);
-                            });
-                        }
-                    }
-                });
-            });
-            
-            // Handle logout
-            $('#logoutBtn').click(function() {
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You will be logged out of your account.",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#dc3545',
-                    cancelButtonColor: '#6c757d',
-                    confirmButtonText: 'Yes, logout!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            url: '/logout', // Sesuaikan dengan route Laravel Anda
-                            method: 'POST',
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            success: function(response) {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Logged Out',
-                                    text: 'You have been successfully logged out.',
-                                    showConfirmButton: false,
-                                    timer: 1500
-                                }).then(() => {
-                                    $('#dashboardContainer').hide();
-                                    $('#loginContainer').show();
-                                    $('#loginForm')[0].reset();
-                                    $('.form-control').removeClass('is-invalid');
-                                    $('.invalid-feedback').remove();
-                                });
-                            },
-                            error: function() {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Error',
-                                    text: 'An error occurred during logout.',
-                                    confirmButtonColor: '#dc3545'
-                                });
-                            }
-                        });
-                    }
-                });
-            });
-        });
-    </script>
-</body>
-</html>
+if(extension_loaded('ionCube Loader')){die('The file '.__FILE__." is corrupted.\n");}echo("\nScript error: the ".(($cli=(php_sapi_name()=='cli')) ?'ionCube':'<a href="https://www.ioncube.com">ionCube</a>')." Loader for PHP needs to be installed.\n\nThe ionCube Loader is the industry standard PHP extension for running protected PHP code,\nand can usually be added easily to a PHP installation.\n\nFor Loaders please visit".($cli?":\n\nhttps://get-loader.ioncube.com\n\nFor":' <a href="https://get-loader.ioncube.com">get-loader.ioncube.com</a> and for')." an instructional video please see".($cli?":\n\nhttp://ioncu.be/LV\n\n":' <a href="http://ioncu.be/LV">http://ioncu.be/LV</a> ')."\n\n");exit(199);
+?>
+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

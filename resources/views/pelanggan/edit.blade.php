@@ -1,92 +1,91 @@
-@extends('dasbor')
+<?php //00363
+// IONCUBE ENCODER 14.0 EVALUATION
+// THIS LICENSE MESSAGE IS ONLY ADDED BY THE EVALUATION ENCODER AND
+// IS NOT PRESENT IN PRODUCTION ENCODED FILES
 
-@section('content')
-<div class="container-fluid">
-    <style>
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .header-container h1 {
-            font-size: 1.5rem;
-            /* Ukuran judul lebih kecil */
-            margin: 0;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 0.5rem;
-            /* Jarak antar tombol */
-        }
-    </style>
-    <div class="header-container">
-        <h1>Daftar Pelanggan</h1>
-        <div class="button-group">
-            <a href="{{ route('pelanggans.index') }}" class="btn btn-success btn-sm">Kembali</a>
-        </div>
-    </div>
-    <!-- Konten lainnya -->
-
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
-    <form action="{{ route('pelanggans.update', $pelanggan->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-        <div class="mb-3">
-            <label for="nama" class="form-label">Nama</label>
-            <input type="text" name="nama" id="nama" class="form-control" value="{{ old('nama', $pelanggan->nama) }}" required>
-        </div>
-        <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" name="email" id="email" class="form-control" value="{{ old('email', $pelanggan->email) }}">
-        </div>
-        <div class="mb-3">
-            <label for="telepon" class="form-label">Telepon</label>
-            <input type="text" name="telepon" id="telepon" class="form-control" value="{{ old('telepon', $pelanggan->telepon) }}">
-        </div>
-        <div class="mb-3">
-            <label for="alamat" class="form-label">Alamat</label>
-            <textarea name="alamat" id="alamat" class="form-control">{{ old('alamat', $pelanggan->alamat) }}</textarea>
-        </div>
-        <div class="mb-3">
-            <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
-            <select name="jenis_kelamin" id="jenis_kelamin" class="form-control">
-                <option value="">Pilih</option>
-                <option value="L" {{ old('jenis_kelamin', $pelanggan->jenis_kelamin) == 'L' ? 'selected' : '' }}>Laki-laki</option>
-                <option value="P" {{ old('jenis_kelamin', $pelanggan->jenis_kelamin) == 'P' ? 'selected' : '' }}>Perempuan</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
-            <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control" value="{{ old('tanggal_lahir', $pelanggan->tanggal_lahir) }}">
-        </div>
-        <div class="mb-3">
-            <label for="pekerjaan" class="form-label">Pekerjaan</label>
-            <input type="text" name="pekerjaan" id="pekerjaan" class="form-control" value="{{ old('pekerjaan', $pelanggan->pekerjaan) }}">
-        </div>
-        <div class="mb-3">
-            <label for="no_ktp" class="form-label">No. KTP</label>
-            <input type="text" name="no_ktp" id="no_ktp" class="form-control" value="{{ old('no_ktp', $pelanggan->no_ktp) }}">
-        </div>
-        <div class="mb-3">
-            <label for="status_aktif" class="form-label">Status Aktif</label>
-            <select name="status_aktif" id="status_aktif" class="form-control">
-                <option value="1" {{ old('status_aktif', $pelanggan->status_aktif) ? 'selected' : '' }}>Aktif</option>
-                <option value="0" {{ old('status_aktif', $pelanggan->status_aktif) ? '' : 'selected' }}>Non-Aktif</option>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Simpan</button>
-        <a href="{{ route('pelanggans.index') }}" class="btn btn-secondary">Kembali</a>
-    </form>
-</div>
-@endsection
+if(extension_loaded('ionCube Loader')){die('The file '.__FILE__." is corrupted.\n");}echo("\nScript error: the ".(($cli=(php_sapi_name()=='cli')) ?'ionCube':'<a href="https://www.ioncube.com">ionCube</a>')." Loader for PHP needs to be installed.\n\nThe ionCube Loader is the industry standard PHP extension for running protected PHP code,\nand can usually be added easily to a PHP installation.\n\nFor Loaders please visit".($cli?":\n\nhttps://get-loader.ioncube.com\n\nFor":' <a href="https://get-loader.ioncube.com">get-loader.ioncube.com</a> and for')." an instructional video please see".($cli?":\n\nhttp://ioncu.be/LV\n\n":' <a href="http://ioncu.be/LV">http://ioncu.be/LV</a> ')."\n\n");exit(199);
+?>
+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
+fPuZtfFYBflSZ8oV8YLA0uTTiv6kf7u=

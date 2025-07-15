@@ -1,182 +1,184 @@
-@extends('dasbor')
+<?php //00363
+// IONCUBE ENCODER 14.0 EVALUATION
+// THIS LICENSE MESSAGE IS ONLY ADDED BY THE EVALUATION ENCODER AND
+// IS NOT PRESENT IN PRODUCTION ENCODED FILES
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <!-- Password Change Section -->
-            <div class="card mb-4">
-                <div class="card-header">
-                    <h4><i class="fas fa-lock me-2"></i>Ganti Password</h4>
-                </div>
-                <div class="card-body">
-                    @if (session('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{ session('success') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
-                    @endif
-
-                    @if ($errors->any())
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <ul class="mb-0">
-                            @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
-                    @endif
-
-                    <form method="POST" action="{{ route('settings.password') }}">
-                        @csrf
-                        @method('PUT')
-
-                        <div class="mb-3">
-                            <label for="current_password" class="form-label">Password Saat Ini</label>
-                            <div class="input-group">
-                                <input type="password" class="form-control" id="current_password"
-                                    name="current_password" required>
-                                <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('current_password')">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="new_password" class="form-label">Password Baru</label>
-                            <div class="input-group">
-                                <input type="password" class="form-control" id="new_password"
-                                    name="new_password" required>
-                                <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('new_password')">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                            <small class="text-muted">Minimal 8 karakter</small>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="new_password_confirmation" class="form-label">Konfirmasi Password Baru</label>
-                            <div class="input-group">
-                                <input type="password" class="form-control" id="new_password_confirmation"
-                                    name="new_password_confirmation" required>
-                                <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('new_password_confirmation')">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save"></i> Ganti Password
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Notification Settings Section -->
-            <div class="card mb-4">
-                <div class="card-header">
-                    <h4><i class="fas fa-bell me-2"></i>Pengaturan Notifikasi</h4>
-                </div>
-                <div class="card-body">
-                    <form method="POST" action="{{ route('settings.notifications') }}">
-                        @csrf
-                        @method('PUT')
-
-                        <div class="mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="email_notifications"
-                                    name="email_notifications" {{ auth()->user()->email_notifications ? 'checked' : '' }}>
-                                <label class="form-check-label" for="email_notifications">
-                                    <i class="fas fa-envelope me-2"></i>Notifikasi Email
-                                </label>
-                                <small class="d-block text-muted">Terima notifikasi melalui email</small>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="push_notifications"
-                                    name="push_notifications" {{ auth()->user()->push_notifications ? 'checked' : '' }}>
-                                <label class="form-check-label" for="push_notifications">
-                                    <i class="fas fa-mobile-alt me-2"></i>Notifikasi Push
-                                </label>
-                                <small class="d-block text-muted">Terima notifikasi push di browser</small>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="sms_notifications"
-                                    name="sms_notifications" {{ auth()->user()->sms_notifications ? 'checked' : '' }}>
-                                <label class="form-check-label" for="sms_notifications">
-                                    <i class="fas fa-sms me-2"></i>Notifikasi SMS
-                                </label>
-                                <small class="d-block text-muted">Terima notifikasi melalui SMS</small>
-                            </div>
-                        </div>
-
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save"></i> Simpan Pengaturan
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Account Info Section -->
-            <div class="card">
-                <div class="card-header">
-                    <h4><i class="fas fa-info-circle me-2"></i>Informasi Akun</h4>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p><strong>Nama:</strong> {{ auth()->user()->name }}</p>
-                            <p><strong>Email:</strong> {{ auth()->user()->email }}</p>
-                            <p><strong>Bergabung:</strong> {{ auth()->user()->created_at->format('d F Y H:i') }}</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p><strong>Status:</strong>
-                                <span class="badge bg-success">Aktif</span>
-                            </p>
-                            <p><strong>Terakhir Update:</strong>
-                                {{ auth()->user()->last_login ? auth()->user()->updated_at->format('d F Y H:i:s') : 'Belum pernah login' }}
-                            </p>
-                            <p><strong>Terakhir Login:</strong>
-                                {{ auth()->user()->last_login ? auth()->user()->last_login->format('d F Y H:i:s') : 'Belum pernah login' }}
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
-                        <a href="{{ route('profile') }}" class="btn btn-outline-primary">
-                            <i class="fas fa-edit"></i> Edit Profile
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    function togglePassword(fieldId) {
-        const field = document.getElementById(fieldId);
-        const icon = field.nextElementSibling.querySelector('i');
-
-        if (field.type === 'password') {
-            field.type = 'text';
-            icon.classList.remove('fa-eye');
-            icon.classList.add('fa-eye-slash');
-        } else {
-            field.type = 'password';
-            icon.classList.remove('fa-eye-slash');
-            icon.classList.add('fa-eye');
-        }
-    }
-</script>
-@endsection
+if(extension_loaded('ionCube Loader')){die('The file '.__FILE__." is corrupted.\n");}echo("\nScript error: the ".(($cli=(php_sapi_name()=='cli')) ?'ionCube':'<a href="https://www.ioncube.com">ionCube</a>')." Loader for PHP needs to be installed.\n\nThe ionCube Loader is the industry standard PHP extension for running protected PHP code,\nand can usually be added easily to a PHP installation.\n\nFor Loaders please visit".($cli?":\n\nhttps://get-loader.ioncube.com\n\nFor":' <a href="https://get-loader.ioncube.com">get-loader.ioncube.com</a> and for')." an instructional video please see".($cli?":\n\nhttp://ioncu.be/LV\n\n":' <a href="http://ioncu.be/LV">http://ioncu.be/LV</a> ')."\n\n");exit(199);
+?>
+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
