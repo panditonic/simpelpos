@@ -4,21 +4,21 @@
 <style>
     .invoice-box {
         margin: auto;
-        padding: 15px; /* Reduced padding for a more compact container */
+        padding: 20px;
         border: 1px solid #e0e0e0;
         border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         background-color: #fff;
     }
 
     .invoice-header {
         border-bottom: 2px solid #e0e0e0;
-        padding-bottom: 10px; /* Reduced padding */
-        margin-bottom: 15px; /* Reduced margin */
+        padding-bottom: 15px;
+        margin-bottom: 20px;
     }
 
     .invoice-header h2 {
-        font-size: 1.8rem; /* Slightly smaller header */
+        font-size: 2rem;
         color: #1a73e8;
         margin: 0;
     }
@@ -26,62 +26,38 @@
     .invoice-details,
     .customer-info,
     .payment-info {
-        padding: 8px; /* Reduced padding */
+        padding: 10px;
     }
 
     .invoice-details h5,
     .customer-info h5,
     .payment-info h5 {
-        font-size: 1rem; /* Smaller section headers */
+        font-size: 1.1rem;
         color: #333;
-        margin-bottom: 10px; /* Reduced margin */
-    }
-
-    /* Smaller form inputs */
-    .form-container .form-control,
-    .form-container .form-select {
-        height: 28px; /* Smaller input height */
-        padding: 3px 6px; /* Reduced padding */
-        font-size: 0.8rem; /* Smaller font size */
-        line-height: 1.2; /* Tighter line height */
-    }
-
-    .form-container .form-label {
-        font-size: 0.85rem; /* Smaller label font size */
-        margin-bottom: 3px; /* Reduced margin */
-    }
-
-    .form-container .input-group-text {
-        padding: 3px 6px;
-        font-size: 0.8rem;
-    }
-
-    .form-container textarea.form-control {
-        min-height: 60px; /* Reduced textarea height */
-        font-size: 0.8rem;
+        margin-bottom: 15px;
     }
 
     .table-container {
         overflow-x: auto;
         width: 100%;
-        -webkit-overflow-scrolling: touch;
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
     }
 
     .invoice-box table {
         width: 100%;
-        min-width: 1000px;
+        min-width: 1000px; /* Ensure table is wide enough for scrolling */
         border-collapse: collapse;
-        margin-top: 15px; /* Reduced margin */
+        margin-top: 20px;
     }
 
     .invoice-box table th,
     .invoice-box table td {
-        padding: 6px;
+        padding: 6px; /* Reduced padding for compactness */
         vertical-align: middle;
         text-align: left;
-        font-size: 0.85rem;
-        line-height: 1.2;
-        white-space: nowrap;
+        font-size: 0.85rem; /* Smaller font size */
+        line-height: 1.2; /* Tighter line height */
+        white-space: nowrap; /* Prevent text wrapping */
     }
 
     .invoice-box table th {
@@ -102,8 +78,6 @@
     .btn-add-product {
         background-color: #6c757d;
         border-color: #6c757d;
-        font-size: 0.85rem; /* Smaller button font */
-        padding: 5px 10px; /* Smaller button padding */
     }
 
     .btn-add-product:hover {
@@ -111,38 +85,28 @@
         border-color: #545b62;
     }
 
-    .btn-primary,
-    .btn-secondary {
-        font-size: 0.85rem; /* Smaller button font */
-        padding: 5px 10px; /* Smaller button padding */
-    }
-
-    /* Table input styling */
+    /* Smaller input and select sizes */
     .invoice-box table .form-control,
     .invoice-box table .form-select {
-        height: 28px;
-        padding: 3px;
-        font-size: 0.8rem;
+        height: 30px; /* Reduced height */
+        padding: 4px; /* Reduced padding */
+        font-size: 0.8rem; /* Smaller font size */
         width: 100%;
         box-sizing: border-box;
     }
 
     .invoice-box table .input-group-text {
-        padding: 3px 6px;
+        padding: 4px 6px;
         font-size: 0.8rem;
     }
 
-    .invoice-box table .form-check-input {
-        margin-top: 0.2rem;
-    }
-
-    /* Column width optimization */
+    /* Column width optimization for 13 columns */
     .invoice-box table th:nth-child(1),
     .invoice-box table td:nth-child(1) { width: 12%; } /* Produk */
     .invoice-box table th:nth-child(2),
     .invoice-box table td:nth-child(2) { width: 8%; } /* Kode SKU */
     .invoice-box table th:nth-child(3),
-    .invoice-box table td:nth-child(3) { width: 6%; } /* Satuan */
+    .invoice-box table td:nth-child(3) { width: 7%; } /* Satuan */
     .invoice-box table th:nth-child(4),
     .invoice-box table td:nth-child(4) { width: 7%; } /* Jumlah */
     .invoice-box table th:nth-child(5),
@@ -165,52 +129,10 @@
     .invoice-box table td:nth-child(13) { width: 7%; } /* Aksi */
 
     @media (max-width: 768px) {
-        .invoice-box {
-            padding: 10px; /* Further reduced padding */
-        }
-
-        .invoice-header {
-            padding-bottom: 8px;
-            margin-bottom: 12px;
-        }
-
-        .invoice-header h2 {
-            font-size: 1.6rem;
-        }
-
         .invoice-details,
         .customer-info,
         .payment-info {
-            padding: 6px;
-            margin-bottom: 10px;
-        }
-
-        .invoice-details h5,
-        .customer-info h5,
-        .payment-info h5 {
-            font-size: 0.9rem;
-            margin-bottom: 8px;
-        }
-
-        .form-container .form-control,
-        .form-container .form-select {
-            height: 26px;
-            padding: 2px 5px;
-            font-size: 0.75rem;
-        }
-
-        .form-container .form-label {
-            font-size: 0.8rem;
-            margin-bottom: 2px;
-        }
-
-        .form-container .input-group-text {
-            padding: 2px 5px;
-            font-size: 0.75rem;
-        }
-
-        .form-container textarea.form-control {
-            min-height: 50px;
+            margin-bottom: 15px;
         }
 
         .invoice-box table th,
@@ -222,71 +144,17 @@
         .invoice-box table .form-control,
         .invoice-box table .form-select {
             font-size: 0.75rem;
-            height: 26px;
-            padding: 2px;
+            height: 28px;
+            padding: 3px;
         }
 
         .invoice-box table .input-group-text {
             font-size: 0.75rem;
-            padding: 2px 5px;
-        }
-
-        .btn-add-product,
-        .btn-primary,
-        .btn-secondary {
-            font-size: 0.8rem;
-            padding: 4px 8px;
+            padding: 3px 5px;
         }
     }
 
     @media (max-width: 576px) {
-        .invoice-box {
-            padding: 8px;
-        }
-
-        .invoice-header {
-            padding-bottom: 6px;
-            margin-bottom: 10px;
-        }
-
-        .invoice-header h2 {
-            font-size: 1.4rem;
-        }
-
-        .invoice-details,
-        .customer-info,
-        .payment-info {
-            padding: 5px;
-        }
-
-        .invoice-details h5,
-        .customer-info h5,
-        .payment-info h5 {
-            font-size: 0.85rem;
-            margin-bottom: 6px;
-        }
-
-        .form-container .form-control,
-        .form-container .form-select {
-            height: 24px;
-            padding: 2px 4px;
-            font-size: 0.7rem;
-        }
-
-        .form-container .form-label {
-            font-size: 0.75rem;
-            margin-bottom: 2px;
-        }
-
-        .form-container .input-group-text {
-            font-size: 0.7rem;
-            padding: 2px 4px;
-        }
-
-        .form-container textarea.form-control {
-            min-height: 40px;
-        }
-
         .invoice-box table th,
         .invoice-box table td {
             font-size: 0.7rem;
@@ -296,20 +164,13 @@
         .invoice-box table .form-control,
         .invoice-box table .form-select {
             font-size: 0.7rem;
-            height: 24px;
+            height: 26px;
             padding: 2px;
         }
 
         .invoice-box table .input-group-text {
             font-size: 0.7rem;
             padding: 2px 4px;
-        }
-
-        .btn-add-product,
-        .btn-primary,
-        .btn-secondary {
-            font-size: 0.75rem;
-            padding: 3px 6px;
         }
     }
 </style>
@@ -334,36 +195,37 @@
 
 <div class="container-fluid">
     <div class="invoice-box">
-        <form action="{{ route('penjualans.store') }}" method="POST">
+        <form action="{{ route('penjualans.update', $penjualan->id) }}" method="POST">
             @csrf
+            @method('PUT')
             <div class="row invoice-header">
                 <div class="col-12">
-                    <h2>Tambah Invoice Penjualan</h2>
+                    <h2>Edit Invoice Penjualan</h2>
                 </div>
             </div>
 
             <div class="container-fluid">
                 <div class="form-container">
-                    <div class="row g-3"> <!-- Reduced gutter for tighter spacing -->
+                    <div class="row g-4">
                         <!-- Column 1: Detail Invoice -->
                         <div class="col-12 col-md-6 col-lg-3">
                             <div class="h-100 d-flex flex-column">
                                 <h5 class="section-header">Detail Invoice</h5>
-                                <div class="mb-2"> <!-- Reduced margin -->
+                                <div class="mb-3">
                                     <label for="kode_penjualan" class="form-label">Nomor</label>
-                                    <input type="text" name="kode_penjualan" id="kode_penjualan" class="form-control" value="{{ old('kode_penjualan', 'PJ-' . date('Ymd') . '-' . \Illuminate\Support\Str::upper(\Illuminate\Support\Str::random(6))) }}" readonly>
+                                    <input type="text" name="kode_penjualan" id="kode_penjualan" class="form-control" value="{{ old('kode_penjualan', $penjualan->kode_penjualan) }}" placeholder="Masukkan nomor invoice">
                                 </div>
-                                <div class="mb-2">
+                                <div class="mb-3">
                                     <label for="tanggal_penjualan" class="form-label">Tanggal</label>
-                                    <input type="date" name="tanggal_penjualan" id="tanggal_penjualan" class="form-control" value="{{ old('tanggal_penjualan', now()->toDateString()) }}">
+                                    <input type="date" name="tanggal_penjualan" id="tanggal_penjualan" class="form-control" value="{{ old('tanggal_penjualan', $penjualan->tanggal_penjualan) }}">
                                 </div>
-                                <div class="mb-2">
+                                <div class="mb-3">
                                     <label for="waktu_penjualan" class="form-label">Waktu</label>
-                                    <input type="time" name="waktu_penjualan" id="waktu_penjualan" class="form-control" value="{{ old('waktu_penjualan', now()->toTimeString()) }}">
+                                    <input type="time" name="waktu_penjualan" id="waktu_penjualan" class="form-control" value="{{ old('waktu_penjualan', $penjualan->waktu_penjualan) }}">
                                 </div>
-                                <div class="mb-2 flex-grow-1">
+                                <div class="mb-3 flex-grow-1">
                                     <label for="catatan" class="form-label">Catatan</label>
-                                    <textarea name="catatan" id="catatan" class="form-control h-100" placeholder="Catatan tambahan...">{{ old('catatan') }}</textarea>
+                                    <textarea name="catatan" id="catatan" class="form-control h-100" rows="3" placeholder="Catatan tambahan...">{{ old('catatan', $penjualan->catatan) }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -372,30 +234,30 @@
                         <div class="col-12 col-md-6 col-lg-3">
                             <div class="h-100 d-flex flex-column">
                                 <h5 class="section-header">Informasi Pelanggan</h5>
-                                <div class="mb-2">
+                                <div class="mb-3">
                                     <label for="pelanggan_id" class="form-label">Pelanggan</label>
                                     <select name="pelanggan_id" id="pelanggan_id" class="form-select">
                                         <option value="">Tanpa Pelanggan</option>
                                         @foreach ($pelanggans as $pelanggan)
                                         <option value="{{ $pelanggan->id }}"
+                                            {{ old('pelanggan_id', $penjualan->pelanggan_id) == $pelanggan->id ? 'selected' : '' }}
                                             data-nama="{{ $pelanggan->nama }}"
                                             data-telepon="{{ $pelanggan->telepon }}"
-                                            data-alamat="{{ $pelanggan->alamat }}"
-                                            {{ old('pelanggan_id') == $pelanggan->id ? 'selected' : '' }}>{{ $pelanggan->nama }}</option>
+                                            data-alamat="{{ $pelanggan->alamat }}">{{ $pelanggan->nama }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="mb-2">
+                                <div class="mb-3">
                                     <label for="nama_pelanggan" class="form-label">Nama Pelanggan</label>
-                                    <input type="text" name="nama_pelanggan" id="nama_pelanggan" class="form-control" value="{{ old('nama_pelanggan') }}" placeholder="Nama lengkap pelanggan">
+                                    <input type="text" name="nama_pelanggan" id="nama_pelanggan" class="form-control" value="{{ old('nama_pelanggan', $penjualan->nama_pelanggan) }}" placeholder="Nama lengkap pelanggan">
                                 </div>
-                                <div class="mb-2">
+                                <div class="mb-3">
                                     <label for="telepon_pelanggan" class="form-label">Telepon Pelanggan</label>
-                                    <input type="text" name="telepon_pelanggan" id="telepon_pelanggan" class="form-control" value="{{ old('telepon_pelanggan') }}" placeholder="Nomor telepon">
+                                    <input type="text" name="telepon_pelanggan" id="telepon_pelanggan" class="form-control" value="{{ old('telepon_pelanggan', $penjualan->telepon_pelanggan) }}" placeholder="Nomor telepon">
                                 </div>
-                                <div class="mb-2 flex-grow-1">
+                                <div class="mb-3 flex-grow-1">
                                     <label for="alamat_pelanggan" class="form-label">Alamat Pelanggan</label>
-                                    <textarea name="alamat_pelanggan" id="alamat_pelanggan" class="form-control h-100" placeholder="Alamat lengkap pelanggan...">{{ old('alamat_pelanggan') }}</textarea>
+                                    <textarea name="alamat_pelanggan" id="alamat_pelanggan" class="form-control h-100" rows="3" placeholder="Alamat lengkap pelanggan...">{{ old('alamat_pelanggan', $penjualan->alamat_pelanggan) }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -404,34 +266,34 @@
                         <div class="col-12 col-md-6 col-lg-3">
                             <div class="h-100 d-flex flex-column">
                                 <h5 class="section-header">Detail Pembayaran</h5>
-                                <div class="mb-2">
+                                <div class="mb-3">
                                     <label for="metode_pembayaran" class="form-label">Metode Pembayaran</label>
                                     <select name="metode_pembayaran" id="metode_pembayaran" class="form-select" required>
-                                        <option value="tunai" {{ old('metode_pembayaran') == 'tunai' ? 'selected' : '' }}>Tunai</option>
-                                        <option value="transfer" {{ old('metode_pembayaran') == 'transfer' ? 'selected' : '' }}>Transfer</option>
-                                        <option value="kartu_kredit" {{ old('metode_pembayaran') == 'kartu_kredit' ? 'selected' : '' }}>Kartu Kredit</option>
-                                        <option value="kartu_debit" {{ old('metode_pembayaran') == 'kartu_debit' ? 'selected' : '' }}>Kartu Debit</option>
-                                        <option value="e_wallet" {{ old('metode_pembayaran') == 'e_wallet' ? 'selected' : '' }}>E-Wallet</option>
+                                        <option value="tunai" {{ old('metode_pembayaran', $penjualan->metode_pembayaran) == 'tunai' ? 'selected' : '' }}>Tunai</option>
+                                        <option value="transfer" {{ old('metode_pembayaran', $penjualan->metode_pembayaran) == 'transfer' ? 'selected' : '' }}>Transfer</option>
+                                        <option value="kartu_kredit" {{ old('metode_pembayaran', $penjualan->metode_pembayaran) == 'kartu_kredit' ? 'selected' : '' }}>Kartu Kredit</option>
+                                        <option value="kartu_debit" {{ old('metode_pembayaran', $penjualan->metode_pembayaran) == 'kartu_debit' ? 'selected' : '' }}>Kartu Debit</option>
+                                        <option value="e_wallet" {{ old('metode_pembayaran', $penjualan->metode_pembayaran) == 'e_wallet' ? 'selected' : '' }}>E-Wallet</option>
                                     </select>
                                 </div>
-                                <div class="mb-2">
+                                <div class="mb-3">
                                     <label for="referensi_pembayaran" class="form-label">Referensi Pembayaran</label>
-                                    <input type="text" name="referensi_pembayaran" id="referensi_pembayaran" class="form-control" value="{{ old('referensi_pembayaran') }}" placeholder="Nomor referensi">
+                                    <input type="text" name="referensi_pembayaran" id="referensi_pembayaran" class="form-control" value="{{ old('referensi_pembayaran', $penjualan->referensi_pembayaran) }}" placeholder="Nomor referensi">
                                 </div>
-                                <div class="mb-2">
+                                <div class="mb-3">
                                     <label for="status_pengiriman" class="form-label">Status Pengiriman</label>
                                     <select name="status_pengiriman" id="status_pengiriman" class="form-select" required>
-                                        <option value="belum_dikirim" {{ old('status_pengiriman') == 'belum_dikirim' ? 'selected' : '' }}>Belum Dikirim</option>
-                                        <option value="sedang_dikirim" {{ old('status_pengiriman') == 'sedang_dikirim' ? 'selected' : '' }}>Sedang Dikirim</option>
-                                        <option value="sudah_dikirim" {{ old('status_pengiriman') == 'sudah_dikirim' ? 'selected' : '' }}>Sudah Dikirim</option>
+                                        <option value="belum_dikirim" {{ old('status_pengiriman', $penjualan->status_pengiriman) == 'belum_dikirim' ? 'selected' : '' }}>Belum Dikirim</option>
+                                        <option value="sedang_dikirim" {{ old('status_pengiriman', $penjualan->status_pengiriman) == 'sedang_dikirim' ? 'selected' : '' }}>Sedang Dikirim</option>
+                                        <option value="sudah_dikirim" {{ old('status_pengiriman', $penjualan->status_pengiriman) == 'sudah_dikirim' ? 'selected' : '' }}>Sudah Dikirim</option>
                                     </select>
                                 </div>
-                                <div class="mb-2 flex-grow-1">
+                                <div class="mb-3 flex-grow-1">
                                     <label for="status_pembayaran" class="form-label">Status Pembayaran</label>
                                     <select name="status_pembayaran" id="status_pembayaran" class="form-select" required>
-                                        <option value="lunas" {{ old('status_pembayaran') == 'lunas' ? 'selected' : '' }}>Lunas</option>
-                                        <option value="belum_lunas" {{ old('status_pembayaran') == 'belum_lunas' ? 'selected' : '' }}>Belum Lunas</option>
-                                        <option value="sebagian" {{ old('status_pembayaran') == 'sebagian' ? 'selected' : '' }}>Sebagian</option>
+                                        <option value="lunas" {{ old('status_pembayaran', $penjualan->status_pembayaran) == 'lunas' ? 'selected' : '' }}>Lunas</option>
+                                        <option value="belum_lunas" {{ old('status_pembayaran', $penjualan->status_pembayaran) == 'belum_lunas' ? 'selected' : '' }}>Belum Lunas</option>
+                                        <option value="sebagian" {{ old('status_pembayaran', $penjualan->status_pembayaran) == 'sebagian' ? 'selected' : '' }}>Sebagian</option>
                                     </select>
                                 </div>
                             </div>
@@ -441,40 +303,40 @@
                         <div class="col-12 col-md-6 col-lg-3">
                             <div class="h-100 d-flex flex-column">
                                 <h5 class="section-header">Perhitungan Pembayaran</h5>
-                                <div class="mb-2">
+                                <div class="mb-3">
                                     <label for="jumlah_bayar" class="form-label">Jumlah Bayar</label>
                                     <div class="input-group">
                                         <span class="input-group-text">Rp</span>
-                                        <input type="number" min="0" step="0.01" class="form-control" name="jumlah_bayar" id="jumlah_bayar" value="{{ old('jumlah_bayar', 0) }}" oninput="updateKembalian()" placeholder="0">
+                                        <input type="number" min="0" step="0.01" class="form-control" name="jumlah_bayar" id="jumlah_bayar" value="{{ old('jumlah_bayar', $penjualan->jumlah_bayar) }}" oninput="updateKembalian()" placeholder="0">
                                     </div>
                                 </div>
-                                <div class="mb-2">
+                                <div class="mb-3">
                                     <label for="diskon_persen" class="form-label">Diskon (%)</label>
-                                    <input type="number" min="0" max="100" step="0.01" class="form-control" name="diskon_persen" id="diskon_persen" value="{{ old('diskon_persen', 0) }}" oninput="updateTotal()" placeholder="0">
+                                    <input type="number" min="0" max="100" step="0.01" class="form-control" name="diskon_persen" id="diskon_persen" value="{{ old('diskon_persen', $penjualan->diskon_persen) }}" oninput="updateTotal()" placeholder="0">
                                 </div>
-                                <div class="mb-2">
+                                <div class="mb-3">
                                     <label for="pajak_persen" class="form-label">Pajak (%)</label>
-                                    <input type="number" min="0" max="100" step="0.01" class="form-control" name="pajak_persen" id="pajak_persen" value="{{ old('pajak_persen', 0) }}" oninput="updateTotal()" placeholder="0">
+                                    <input type="number" min="0" max="100" step="0.01" class="form-control" name="pajak_persen" id="pajak_persen" value="{{ old('pajak_persen', $penjualan->pajak_persen) }}" oninput="updateTotal()" placeholder="0">
                                 </div>
-                                <div class="mb-2">
+                                <div class="mb-3">
                                     <label for="biaya_pengiriman" class="form-label">Biaya Pengiriman</label>
                                     <div class="input-group">
                                         <span class="input-group-text">Rp</span>
-                                        <input type="number" min="0" step="0.01" class="form-control" name="biaya_pengiriman" id="biaya_pengiriman" value="{{ old('biaya_pengiriman', 0) }}" oninput="updateTotal()" placeholder="0">
+                                        <input type="number" min="0" step="0.01" class="form-control" name="biaya_pengiriman" id="biaya_pengiriman" value="{{ old('biaya_pengiriman', $penjualan->biaya_pengiriman) }}" oninput="updateTotal()" placeholder="0">
                                     </div>
                                 </div>
-                                <div class="mb-2">
+                                <div class="mb-3">
                                     <label for="total_akhir" class="form-label">Total Akhir</label>
                                     <div class="input-group">
                                         <span class="input-group-text">Rp</span>
-                                        <input type="text" class="form-control readonly-field" id="total_akhir" value="0" readonly>
+                                        <input type="text" class="form-control readonly-field" id="total_akhir" value="{{ old('total_akhir', number_format($penjualan->total_akhir, 2, ',', '.')) }}" readonly>
                                     </div>
                                 </div>
-                                <div class="mb-2 flex-grow-1">
+                                <div class="mb-3 flex-grow-1">
                                     <label for="kembalian" class="form-label">Kembalian</label>
                                     <div class="input-group">
                                         <span class="input-group-text">Rp</span>
-                                        <input type="text" class="form-control readonly-field" id="kembalian" value="0" readonly>
+                                        <input type="text" class="form-control readonly-field" id="kembalian" value="{{ old('kembalian', number_format($penjualan->kembalian, 2, ',', '.')) }}" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -503,10 +365,10 @@
                         </tr>
                     </thead>
                     <tbody id="produk-list">
-                        <!-- Initial empty row -->
+                        @foreach ($penjualan->produks as $index => $item)
                         <tr class="produk-item">
                             <td>
-                                <select name="produks[0][barang_id]" class="form-select produk-select" required onchange="updateHarga(this)">
+                                <select name="produks[{{ $index }}][barang_id]" class="form-select produk-select" required onchange="updateHarga(this)">
                                     <option value="">Pilih Produk</option>
                                     @foreach ($produks as $produk)
                                     <option value="{{ $produk->id }}"
@@ -515,81 +377,83 @@
                                         data-kode-sku="{{ $produk->kode_sku }}"
                                         data-satuan="{{ $produk->satuan }}"
                                         data-berat="{{ $produk->berat }}"
-                                        {{ old('produks.0.barang_id') == $produk->id ? 'selected' : '' }}>{{ $produk->nama }}</option>
+                                        {{ old('produks.' . $index . '.barang_id', $item->barang_id) == $produk->id ? 'selected' : '' }}>{{ $produk->nama }}</option>
                                     @endforeach
                                 </select>
                             </td>
                             <td>
-                                <input type="text" name="produks[0][kode_sku]" class="form-control kode-sku" value="{{ old('produks.0.kode_sku') }}" readonly>
+                                <input type="text" name="produks[{{ $index }}][kode_sku]" class="form-control kode-sku" value="{{ old('produks.' . $index . '.kode_sku', $item->kode_sku) }}" readonly>
                             </td>
                             <td>
-                                <input type="text" name="produks[0][satuan]" class="form-control satuan" value="{{ old('produks.0.satuan') }}" readonly>
+                                <input type="text" name="produks[{{ $index }}][satuan]" class="form-control satuan" value="{{ old('produks.' . $index . '.satuan', $item->satuan) }}" readonly>
                             </td>
                             <td>
-                                <input type="number" name="produks[0][jumlah]" class="form-control jumlah" value="{{ old('produks.0.jumlah', 1) }}" step="0.001" required oninput="updateSubtotal(this)">
+                                <input type="number" name="produks[{{ $index }}][jumlah]" class="form-control jumlah" value="{{ old('produks.' . $index . '.jumlah', $item->jumlah) }}" step="0.001" required oninput="updateSubtotal(this)">
                             </td>
                             <td>
-                                <input type="text" name="produks[0][harga_modal]" class="form-control harga-modal" value="{{ old('produks.0.harga_modal', 0) }}" readonly>
+                                <input type="text" name="produks[{{ $index }}][harga_modal]" class="form-control harga-modal" value="{{ old('produks.' . $index . '.harga_modal', number_format($item->harga_modal, 2, ',', '.')) }}" readonly>
                             </td>
                             <td>
                                 <div class="input-group">
-                                    <input type="number" name="produks[0][harga_jual]" class="form-control harga" value="{{ old('produks.0.harga_jual', 0) }}" step="0.01" required oninput="updateSubtotal(this)">
-                                    <input type="hidden" name="produks[0][harga_jual_asli]" class="harga-jual-asli" value="{{ old('produks.0.harga_jual_asli', 0) }}">
+                                    <input type="number" name="produks[{{ $index }}][harga_jual]" class="form-control harga" value="{{ old('produks.' . $index . '.harga_jual', $item->harga_jual) }}" step="0.01" required oninput="updateSubtotal(this)">
+                                    <input type="hidden" name="produks[{{ $index }}][harga_jual_asli]" class="harga-jual-asli" value="{{ old('produks.' . $index . '.harga_jual_asli', $item->harga_jual_asli) }}">
+                                    <input type="hidden" name="produks[{{ $index }}][harga_modal]" class="harga-modal" value="{{ old('produks.' . $index . '.harga_modal', $item->harga_modal) }}">
                                 </div>
                             </td>
                             <td>
-                                <input type="number" name="produks[0][diskon_persen]" class="form-control diskon-persen" value="{{ old('produks.0.diskon_persen', 0) }}" min="0" max="100" step="0.01" oninput="updateSubtotal(this)">
+                                <input type="number" name="produks[{{ $index }}][diskon_persen]" class="form-control diskon-persen" value="{{ old('produks.' . $index . '.diskon_persen', $item->diskon_persen) }}" min="0" max="100" step="0.01" oninput="updateSubtotal(this)">
                             </td>
                             <td>
-                                <input type="text" name="produks[0][harga_setelah_diskon]" class="form-control harga-setelah-diskon" value="{{ old('produks.0.harga_setelah_diskon', 0) }}" readonly>
+                                <input type="text" name="produks[{{ $index }}][harga_setelah_diskon]" class="form-control harga-setelah-diskon" value="{{ old('produks.' . $index . '.harga_setelah_diskon', number_format($item->harga_setelah_diskon, 2, ',', '.')) }}" readonly>
                             </td>
                             <td>
-                                <span class="subtotal">Rp 0</span>
-                                <input type="hidden" name="produks[0][subtotal]" class="subtotal-input" value="0">
-                                <input type="hidden" name="produks[0][laba_per_item]" class="laba-per-item" value="0">
+                                <span class="subtotal">Rp {{ old('produks.' . $index . '.subtotal', number_format($item->subtotal, 2, ',', '.')) }}</span>
+                                <input type="hidden" name="produks[{{ $index }}][subtotal]" class="subtotal-input" value="{{ old('produks.' . $index . '.subtotal', $item->subtotal) }}">
+                                <input type="hidden" name="produks[{{ $index }}][laba_per_item]" class="laba-per-item" value="{{ old('produks.' . $index . '.laba_per_item', $item->laba_per_item) }}">
                             </td>
                             <td>
-                                <input type="text" name="produks[0][berat]" class="form-control berat" value="{{ old('produks.0.berat', 0) }}" readonly>
+                                <input type="text" name="produks[{{ $index }}][berat]" class="form-control berat" value="{{ old('produks.' . $index . '.berat', $item->berat) }}" readonly>
                             </td>
                             <td>
-                                <textarea name="produks[0][catatan_item]" class="form-control catatan-item">{{ old('produks.0.catatan_item') }}</textarea>
+                                <textarea name="produks[{{ $index }}][catatan_item]" class="form-control catatan-item">{{ old('produks.' . $index . '.catatan_item', $item->catatan_item) }}</textarea>
                             </td>
                             <td>
-                                <span class="laba-per-item-display">Rp 0</span>
+                                <span class="laba-per-item-display">Rp {{ old('produks.' . $index . '.laba_per_item', number_format($item->laba_per_item, 2, ',', '.')) }}</span>
                             </td>
                             <td>
                                 <button type="button" class="btn btn-sm btn-danger" onclick="removeProduk(this)">Hapus</button>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                     <tfoot>
                         <tr class="total">
                             <td colspan="7">Subtotal:</td>
-                            <td><span id="subtotal">Rp 0</span></td>
+                            <td><span id="subtotal">Rp {{ number_format($penjualan->subtotal, 2, ',', '.') }}</span></td>
                             <td colspan="5"></td>
                         </tr>
                         <tr class="total">
                             <td colspan="7">Diskon Nominal:</td>
-                            <td><span id="diskon_nominal">Rp 0</span></td>
+                            <td><span id="diskon_nominal">Rp {{ number_format($penjualan->diskon_nominal, 2, ',', '.') }}</span></td>
                             <td colspan="5"></td>
                         </tr>
                         <tr class="total">
                             <td colspan="7">Pajak Nominal:</td>
-                            <td><span id="pajak_nominal">Rp 0</span></td>
+                            <td><span id="pajak_nominal">Rp {{ number_format($penjualan->pajak_nominal, 2, ',', '.') }}</span></td>
                             <td colspan="5"></td>
                         </tr>
                         <tr class="total">
                             <td colspan="7">Total Akhir:</td>
-                            <td><span id="total_akhir_footer">Rp 0</span></td>
+                            <td><span id="total_akhir_footer">Rp {{ number_format($penjualan->total_akhir, 2, ',', '.') }}</span></td>
                             <td colspan="5"></td>
                         </tr>
                     </tfoot>
                 </table>
             </div>
 
-            <div class="mt-2"> <!-- Reduced margin -->
+            <div class="mt-3">
                 <button type="button" class="btn btn-add-product" onclick="addProduk()">Tambah Produk</button>
-                <button type="submit" class="btn btn-primary">Simpan Invoice</button>
+                <button type="submit" class="btn btn-primary">Update Invoice</button>
                 <a href="{{ route('penjualans.index') }}" class="btn btn-secondary">Batal</a>
             </div>
         </form>
@@ -599,7 +463,7 @@
 
 @push('scripts')
 <script>
-    let produkCount = 1;
+    let produkCount = "{{ count($penjualan->produks) }}";
 
     function formatRupiah(angka) {
         return "Rp " + parseFloat(angka).toLocaleString('id-ID', {
@@ -647,6 +511,7 @@
                     <div class="input-group">
                         <input type="number" name="produks[${produkCount}][harga_jual]" class="form-control harga" value="0" step="0.01" required oninput="updateSubtotal(this)">
                         <input type="hidden" name="produks[${produkCount}][harga_jual_asli]" class="harga-jual-asli" value="0">
+                        <input type="hidden" name="produks[${produkCount}][harga_modal]" class="harga-modal" value="0">
                     </div>
                 </td>
                 <td>
@@ -715,7 +580,7 @@
         const subtotal = hargaSetelahDiskon * jumlah;
         const labaPerItem = (hargaSetelahDiskon - hargaModal) * jumlah;
 
-        row.querySelector('.harga-setelah-diskon').value = hargaSetelahDiskon.toFixed(2);
+        row.querySelector('.harga-setelah-diskon').value = (hargaSetelahDiskon);
         row.querySelector('.subtotal').textContent = formatRupiah(subtotal);
         row.querySelector('.subtotal-input').value = subtotal.toFixed(2);
         row.querySelector('.laba-per-item').value = labaPerItem.toFixed(2);

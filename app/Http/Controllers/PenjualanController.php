@@ -21,10 +21,6 @@ class PenjualanController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            // $penjualans = Penjualan::with(['pelanggan'])
-            //     ->orderBy('tanggal_penjualan', 'desc')
-            //     ->select(['id', 'kode_penjualan', 'tanggal_penjualan', 'nama_pelanggan', 'total_akhir', 'status_pembayaran']);
-
             $penjualans = Penjualan::with(['pelanggan'])
                 ->leftJoin('pelanggans', 'penjualans.pelanggan_id', '=', 'pelanggans.id')
                 ->orderBy('penjualans.tanggal_penjualan', 'desc')
@@ -81,7 +77,7 @@ class PenjualanController extends Controller
             'produks.*.harga_jual_asli' => 'required|numeric|min:0',
             'produks.*.harga_modal' => 'required|numeric|min:0',
             'produks.*.diskon_persen' => 'nullable|numeric|min:0|max:100',
-            // 'produks.*.harga_setelah_diskon' => 'required|numeric|min:0',
+            'produks.*.harga_setelah_diskon' => 'required|numeric|min:0',
             'produks.*.subtotal' => 'required|numeric|min:0',
             'produks.*.berat' => 'nullable|numeric|min:0',
             'produks.*.catatan_item' => 'nullable|string',
@@ -150,6 +146,7 @@ class PenjualanController extends Controller
                 $penjualanProduk->harga_jual_asli = $item['harga_jual_asli'];
                 $penjualanProduk->harga_modal = $item['harga_modal'];
                 $penjualanProduk->diskon_persen = $item['diskon_persen'] ?? 0;
+                $penjualanProduk->diskon_nominal = ($item['harga_jual'] * $item['jumlah'] * ($item['diskon_persen'] ?? 0)) / 100; // Calculate per-item discount
                 $penjualanProduk->harga_setelah_diskon = $item['harga_setelah_diskon'];
                 $penjualanProduk->subtotal = $item['subtotal'];
                 $penjualanProduk->berat = $item['berat'] ?? 0;
@@ -260,6 +257,7 @@ class PenjualanController extends Controller
                 $produk = Produk::findOrFail($item['barang_id']);
                 $harga_setelah_diskon = $item['harga_jual'] * (1 - $item['diskon_persen'] / 100);
                 $subtotal_item = $harga_setelah_diskon * $item['jumlah'];
+                $diskon_nominal_item = ($item['harga_jual'] * $item['jumlah'] * $item['diskon_persen']) / 100; // Calculate per-item discount
                 $laba_per_item = $item['harga_modal'] ? ($harga_setelah_diskon - $item['harga_modal']) * $item['jumlah'] : 0;
 
                 $penjualanProduk = new PenjualanProduk();
@@ -272,6 +270,7 @@ class PenjualanController extends Controller
                 $penjualanProduk->harga_jual_asli = $item['harga_jual'];
                 $penjualanProduk->harga_modal = $item['harga_modal'] ?? 0;
                 $penjualanProduk->diskon_persen = $item['diskon_persen'];
+                $penjualanProduk->diskon_nominal = $diskon_nominal_item;
                 $penjualanProduk->harga_setelah_diskon = $harga_setelah_diskon;
                 $penjualanProduk->jumlah = $item['jumlah'];
                 $penjualanProduk->subtotal = $subtotal_item;

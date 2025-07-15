@@ -3,7 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Penjualan;
+use App\Models\PenjualanProduk;
 use App\Models\Produk;
+use App\Models\Pelanggan;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
@@ -14,127 +17,158 @@ class PenjualanSeeder extends Seeder
      * Run the database seeds.
      *
      * @return void
+     * @throws \Exception
      */
     public function run()
     {
-        // Disable foreign key checks to allow truncation
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        DB::table('penjualans')->truncate();
-        DB::table('penjualan_produks')->truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-
+        // Initialize Faker with Indonesian locale
         $faker = Faker::create('id_ID');
+
+        // Define allowed values
         $metode_pembayaran = ['tunai', 'transfer', 'kartu_kredit', 'kartu_debit', 'e_wallet'];
         $status_pengiriman = ['belum_dikirim', 'sedang_dikirim', 'sudah_dikirim'];
+        $status_pembayaran = ['lunas', 'belum_lunas', 'sebagian'];
+        $promo_types = ['B1G1', 'Discount', 'Bundle'];
 
-        // Fetch IDs from related tables
-        $user_ids = DB::table('users')->pluck('id')->toArray();
-        $pelanggan_ids = DB::table('pelanggans')->pluck('id')->toArray();
-        $produks = Produk::all(['id', 'nama', 'kode_sku', 'harga_jual', 'harga_modal', 'satuan', 'berat'])->toArray();
+        // Fetch data from related tables
+        $user_ids = User::pluck('id')->toArray();
+        $pelanggan_ids = Pelanggan::pluck('id')->toArray();
+        $produks = Produk::select('id', 'nama', 'kode_sku', 'harga_jual', 'harga_modal', 'satuan', 'berat')->get()->toArray();
 
-        // Check if required data exists
+        // Validate related tables
         if (empty($user_ids) || empty($pelanggan_ids) || empty($produks)) {
             throw new \Exception('Users, pelanggans, or produks table is empty. Please seed those tables first.');
         }
 
+        // Disable foreign key checks for truncation
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Penjualan::truncate();
+        PenjualanProduk::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
         // Generate 100 sales records
         for ($i = 0; $i < 100; $i++) {
             $subtotal = 0;
-            $diskon_persen = $faker->randomFloat(2, 0, 20);
-            $pajak_persen = $faker->randomFloat(2, 0, 11);
-            $biaya_pengiriman = $faker->randomFloat(2, 0, 50000);
+            $diskon_persen = $faker->randomFloat(2, 0, 20); // 0-20%
+            $pajak_persen = $faker->randomFloat(2, 0, 11); // 0-11%
+            $biaya_pengiriman = round($faker->randomFloat(2, 0, 50000), 2); // 0-50,000 IDR
 
             // Generate unique kode_penjualan
-            $kode_penjualan = 'SALE-' . str_pad($i + 1, 6, '0', STR_PAD_LEFT);
+            $kode_penjualan = 'PJ-' . date('Ymd') . '-' . strtoupper($faker->unique()->lexify('??????'));
 
-            // Insert penjualan record
-            $penjualan_id = DB::table('penjualans')->insertGetId([
-                'kode_penjualan' => $kode_penjualan,
-                'tanggal_penjualan' => $faker->dateTimeBetween('-1 year', 'now')->format('Y-m-d'),
-                'waktu_penjualan' => $faker->time(),
-                'pelanggan_id' => $faker->randomElement($pelanggan_ids),
-                'nama_pelanggan' => $faker->name,
-                'telepon_pelanggan' => $faker->phoneNumber,
-                'alamat_pelanggan' => $faker->address,
-                'user_id' => $faker->randomElement($user_ids),
-                'subtotal' => 0, // Will be updated after products
-                'diskon_persen' => $diskon_persen,
-                'diskon_nominal' => 0, // Will be calculated
-                'pajak_persen' => $pajak_persen,
-                'pajak_nominal' => 0, // Will be calculated
-                'biaya_pengiriman' => $biaya_pengiriman,
-                'total_akhir' => 0, // Will be calculated
-                'metode_pembayaran' => $faker->randomElement($metode_pembayaran),
-                'jumlah_bayar' => 0, // Will be calculated
-                'kembalian' => 0, // Will be calculated
-                // 'status_pembayaran' is set by trigger based on kembalian
-                'status_pengiriman' => $faker->randomElement($status_pengiriman),
-                'catatan' => $faker->sentence,
-                'referensi_pembayaran' => $faker->bothify('REF-#####'),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+            // Customer info: 50% chance of using pelanggan_id, otherwise manual details
+            $pelanggan_id = $faker->boolean(50) ? $faker->randomElement($pelanggan_ids) : null;
+            $nama_pelanggan = $pelanggan_id ? null : $faker->name;
+            $telepon_pelanggan = $pelanggan_id ? null : $faker->phoneNumber;
+            $alamat_pelanggan = $pelanggan_id ? null : $faker->address;
 
-            // Generate 10 products for each sale
-            for ($j = 0; $j < 10; $j++) {
-                // Randomly select a product
+            // Referensi pembayaran: 70% chance
+            $referensi_pembayaran = $faker->boolean(70) ? $faker->bothify('REF-#####') : null;
+
+            // Create Penjualan record
+            $penjualan = new Penjualan();
+            $penjualan->kode_penjualan = $kode_penjualan;
+            $penjualan->tanggal_penjualan = $faker->dateTimeBetween('-1 year', 'now')->format('Y-m-d');
+            $penjualan->waktu_penjualan = $faker->time('H:i:s');
+            $penjualan->pelanggan_id = $pelanggan_id;
+            $penjualan->nama_pelanggan = $nama_pelanggan;
+            $penjualan->telepon_pelanggan = $telepon_pelanggan;
+            $penjualan->alamat_pelanggan = $alamat_pelanggan;
+            $penjualan->user_id = $faker->randomElement($user_ids);
+            $penjualan->subtotal = 0; // To be calculated
+            $penjualan->diskon_persen = $diskon_persen;
+            $penjualan->diskon_nominal = 0; // To be calculated
+            $penjualan->pajak_persen = $pajak_persen;
+            $penjualan->pajak_nominal = 0; // To be calculated
+            $penjualan->biaya_pengiriman = $biaya_pengiriman;
+            $penjualan->total_akhir = 0; // To be calculated
+            $penjualan->metode_pembayaran = $faker->randomElement($metode_pembayaran);
+            $penjualan->jumlah_bayar = 0; // To be calculated
+            $penjualan->kembalian = 0; // To be calculated
+            $penjualan->status_pengiriman = $faker->randomElement($status_pengiriman);
+            $penjualan->catatan = $faker->optional(0.7)->sentence; // 70% chance
+            $penjualan->referensi_pembayaran = $referensi_pembayaran;
+            $penjualan->created_at = now();
+            $penjualan->updated_at = now();
+            $penjualan->save();
+
+            // Generate 1-5 products per sale for realism
+            $num_products = $faker->numberBetween(1, 5);
+            $penjualan_produks = [];
+
+            for ($j = 0; $j < $num_products; $j++) {
                 $produk = $faker->randomElement($produks);
+                $jumlah = $faker->randomFloat(3, 0.001, 50); // Realistic quantity: 0.001-50
+                $diskon_persen_item = $faker->randomFloat(2, 0, 30); // 0-30%
+                $is_promo = $diskon_persen_item > 0 && $faker->boolean(20); // 20% chance if discounted
+                $jenis_promo = $is_promo ? $faker->randomElement($promo_types) : null;
 
-                // Product data from Produk model
-                $harga_jual = $produk['harga_jual'];
-                $harga_modal = $produk['harga_modal'];
-                $nama = $produk['nama'];
-                $kode_sku = $produk['kode_sku'];
-                $satuan = $produk['satuan'];
-                $berat = $produk['berat'];
+                // Realistic price ranges
+                $harga_jual = min($produk['harga_jual'], 1000000); // Cap at 1M IDR
+                $harga_modal = $produk['harga_modal'] ? min($produk['harga_modal'], $harga_jual * 0.8) : 0; // Ensure modal < jual
 
-                $jumlah = $faker->randomFloat(3, 1, 100);
-                $diskon_persen_item = $faker->randomFloat(2, 0, 30);
-                $diskon_nominal = ($harga_jual * $jumlah * $diskon_persen_item) / 100;
-                $harga_setelah_diskon = $harga_jual - ($diskon_nominal / $jumlah);
+                // Calculate item values
+                $diskon_nominal_per_unit = ($harga_jual * $diskon_persen_item) / 100;
+                $harga_setelah_diskon = $harga_jual - $diskon_nominal_per_unit;
+                $diskon_nominal_total = $diskon_nominal_per_unit * $jumlah;
                 $item_subtotal = $harga_setelah_diskon * $jumlah;
                 $laba_per_item = ($harga_setelah_diskon - $harga_modal) * $jumlah;
 
                 $subtotal += $item_subtotal;
 
-                DB::table('penjualan_produks')->insert([
-                    'penjualan_id' => $penjualan_id,
+                $penjualan_produks[] = [
+                    'penjualan_id' => $penjualan->id,
                     'barang_id' => $produk['id'],
-                    'kode_sku' => $kode_sku,
-                    'nama' => $nama,
-                    'satuan' => $satuan,
-                    'harga_modal' => $harga_modal,
-                    'harga_jual' => $harga_jual,
-                    'harga_jual_asli' => $harga_jual,
+                    'kode_sku' => $produk['kode_sku'],
+                    'nama' => $produk['nama'],
+                    'satuan' => $produk['satuan'],
+                    'harga_modal' => round($harga_modal, 2),
+                    'harga_jual' => round($harga_jual, 2),
+                    'harga_jual_asli' => round($harga_jual, 2),
                     'jumlah' => $jumlah,
                     'diskon_persen' => $diskon_persen_item,
-                    'diskon_nominal' => $diskon_nominal,
-                    'harga_setelah_diskon' => $harga_setelah_diskon,
-                    'subtotal' => $item_subtotal,
-                    'laba_per_item' => $laba_per_item,
-                    'berat' => $berat,
-                    'catatan_item' => $faker->sentence,
-                    'is_promo' => $faker->boolean(20),
-                    'jenis_promo' => $faker->randomElement(['B1G1', 'Discount', 'Bundle']),
+                    'diskon_nominal' => round($diskon_nominal_total, 2), // Fixed: Include diskon_nominal
+                    'harga_setelah_diskon' => round($harga_setelah_diskon, 2),
+                    'subtotal' => round($item_subtotal, 2),
+                    'laba_per_item' => round($laba_per_item, 2),
+                    'berat' => $produk['berat'] ? round($produk['berat'], 3) : 0,
+                    'catatan_item' => $faker->optional(0.5)->sentence, // 50% chance
+                    'is_promo' => $is_promo,
+                    'jenis_promo' => $jenis_promo,
                     'created_at' => now(),
                     'updated_at' => now(),
-                ]);
+                ];
             }
 
-            // Update penjualan calculations
-            $diskon_nominal = ($subtotal * $diskon_persen) / 100;
-            $pajak_nominal = ($subtotal * $pajak_persen) / 100;
-            $total_akhir = $subtotal - $diskon_nominal + $pajak_nominal + $biaya_pengiriman;
-            $jumlah_bayar = $faker->randomFloat(2, $total_akhir - 50000, $total_akhir + 100000); // Allow negative kembalian
-            $kembalian = $jumlah_bayar - $total_akhir;
+            // Insert PenjualanProduk records in bulk
+            DB::table('penjualan_produks')->insert($penjualan_produks);
 
-            DB::table('penjualans')->where('id', $penjualan_id)->update([
-                'subtotal' => $subtotal,
+            // Calculate totals
+            $diskon_nominal = round(($subtotal * $diskon_persen) / 100, 2);
+            $subtotal_setelah_diskon = $subtotal - $diskon_nominal;
+            $pajak_nominal = round(($subtotal_setelah_diskon * $pajak_persen) / 100, 2);
+            $total_akhir = $subtotal_setelah_diskon + $pajak_nominal + $biaya_pengiriman;
+
+            // Determine jumlah_bayar and status_pembayaran
+            $status_pembayaran_choice = $faker->randomElement($status_pembayaran);
+            if ($status_pembayaran_choice === 'lunas') {
+                $jumlah_bayar = round($faker->randomFloat(2, $total_akhir, $total_akhir + 50000), 2);
+            } elseif ($status_pembayaran_choice === 'belum_lunas') {
+                $jumlah_bayar = 0;
+            } else { // sebagian
+                $jumlah_bayar = round($faker->randomFloat(2, 0.01, $total_akhir - 0.01), 2);
+            }
+            $kembalian = round($jumlah_bayar - $total_akhir, 2);
+
+            // Update Penjualan record
+            $penjualan->update([
+                'subtotal' => round($subtotal, 2),
                 'diskon_nominal' => $diskon_nominal,
                 'pajak_nominal' => $pajak_nominal,
                 'total_akhir' => $total_akhir,
                 'jumlah_bayar' => $jumlah_bayar,
                 'kembalian' => $kembalian,
+                'status_pembayaran' => $status_pembayaran_choice,
                 'updated_at' => now(),
             ]);
         }

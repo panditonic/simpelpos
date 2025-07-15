@@ -29,6 +29,6 @@ class DatabaseSeeder extends Seeder
         Produk::factory()->count(50)->create();
         Pelanggan::factory()->count(50)->create();
 
-        // $this->call(PenjualanSeeder::class);
+        $this->call(PenjualanSeeder::class);
     }
 }
