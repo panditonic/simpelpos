@@ -28,11 +28,15 @@ class PenjualanProduk extends Model
         'laba_per_item',
         'berat',
         'catatan_item',
-        'is_promo',
-        'jenis_promo',
+        // 'is_promo',
+        // 'jenis_promo',
     ];
 
     protected $guarded = [];
+
+    protected $attributes = [
+        'is_promo' => false,
+    ];
 
     protected $casts = [
         'harga_modal' => 'decimal:2',
@@ -45,7 +49,7 @@ class PenjualanProduk extends Model
         'subtotal' => 'decimal:2',
         'laba_per_item' => 'decimal:2',
         'berat' => 'decimal:2',
-        'is_promo' => 'boolean',
+        // 'is_promo' => 'boolean',
     ];
 
     public function penjualan()

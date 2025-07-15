@@ -24,3 +24,4 @@ responsive tampilannya.
 ![analitik](/docs/crudcustomfilternospa.png)
 - penjualan
 ![analitik](/docs/tpenjualan.png)
+![analitik](/docs/tpenjualanenrichment.png)
