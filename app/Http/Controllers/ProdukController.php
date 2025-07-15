@@ -17,12 +17,13 @@ class ProdukController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function datatable(Request $request)
     {
         if ($request->ajax()) {
             // Fetch products with related kategori and merek
             $products = Produk::with(['kategori', 'merek'])->select('produks.*');
+            $products->where('aktif', 1);
 
             // Apply custom filters
             $products->when($request->kategori, function ($query) use ($request) {

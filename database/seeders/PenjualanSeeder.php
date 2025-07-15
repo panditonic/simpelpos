@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
+use Carbon\Carbon;
 
 class PenjualanSeeder extends Seeder
 {
@@ -21,7 +22,7 @@ class PenjualanSeeder extends Seeder
      */
     public function run()
     {
-        // Initialize Faker with Indonesian locale
+        // Initialize Ffaker with Indonesian locale
         $faker = Faker::create('id_ID');
 
         // Define allowed values
@@ -46,15 +47,28 @@ class PenjualanSeeder extends Seeder
         PenjualanProduk::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        // Generate 100 sales records
-        for ($i = 0; $i < 100; $i++) {
+        // Set today's date in WIT (UTC+9)
+        $today = Carbon::today('Asia/Jayapura'); // July 15, 2025
+
+        // Generate 1000 sales: 20% today, 80% past year
+        $total_sales = 1000;
+        $today_sales = (int) ($total_sales * 0.2); // 200 sales for today
+        $other_sales = $total_sales - $today_sales; // 800 sales for past year
+
+        for ($i = 0; $i < $total_sales; $i++) {
             $subtotal = 0;
             $diskon_persen = $faker->randomFloat(2, 0, 20); // 0-20%
             $pajak_persen = $faker->randomFloat(2, 0, 11); // 0-11%
             $biaya_pengiriman = round($faker->randomFloat(2, 0, 50000), 2); // 0-50,000 IDR
 
             // Generate unique kode_penjualan
-            $kode_penjualan = 'PJ-' . date('Ymd') . '-' . strtoupper($faker->unique()->lexify('??????'));
+            $kode_penjualan = 'PJ-' . $today->format('Ymd') . '-' . strtoupper($faker->unique()->lexify('??????'));
+
+            // Determine date: 20% today, 80% past year (weighted to recent months)
+            $is_today = $i < $today_sales;
+            $tanggal_penjualan = $is_today 
+                ? $today->format('Y-m-d')
+                : $faker->dateTimeBetween('-1 week', 'now', 'Asia/Jayapura')->format('Y-m-d');
 
             // Customer info: 50% chance of using pelanggan_id, otherwise manual details
             $pelanggan_id = $faker->boolean(50) ? $faker->randomElement($pelanggan_ids) : null;
@@ -68,7 +82,7 @@ class PenjualanSeeder extends Seeder
             // Create Penjualan record
             $penjualan = new Penjualan();
             $penjualan->kode_penjualan = $kode_penjualan;
-            $penjualan->tanggal_penjualan = $faker->dateTimeBetween('-1 year', 'now')->format('Y-m-d');
+            $penjualan->tanggal_penjualan = $tanggal_penjualan;
             $penjualan->waktu_penjualan = $faker->time('H:i:s');
             $penjualan->pelanggan_id = $pelanggan_id;
             $penjualan->nama_pelanggan = $nama_pelanggan;
@@ -88,8 +102,8 @@ class PenjualanSeeder extends Seeder
             $penjualan->status_pengiriman = $faker->randomElement($status_pengiriman);
             $penjualan->catatan = $faker->optional(0.7)->sentence; // 70% chance
             $penjualan->referensi_pembayaran = $referensi_pembayaran;
-            $penjualan->created_at = now();
-            $penjualan->updated_at = now();
+            $penjualan->created_at = $is_today ? $today : Carbon::parse($tanggal_penjualan, 'Asia/Jayapura');
+            $penjualan->updated_at = $penjualan->created_at;
             $penjualan->save();
 
             // Generate 1-5 products per sale for realism
@@ -127,7 +141,7 @@ class PenjualanSeeder extends Seeder
                     'harga_jual_asli' => round($harga_jual, 2),
                     'jumlah' => $jumlah,
                     'diskon_persen' => $diskon_persen_item,
-                    'diskon_nominal' => round($diskon_nominal_total, 2), // Fixed: Include diskon_nominal
+                    'diskon_nominal' => round($diskon_nominal_total, 2),
                     'harga_setelah_diskon' => round($harga_setelah_diskon, 2),
                     'subtotal' => round($item_subtotal, 2),
                     'laba_per_item' => round($laba_per_item, 2),
@@ -135,8 +149,8 @@ class PenjualanSeeder extends Seeder
                     'catatan_item' => $faker->optional(0.5)->sentence, // 50% chance
                     'is_promo' => $is_promo,
                     'jenis_promo' => $jenis_promo,
-                    'created_at' => now(),
-                    'updated_at' => now(),
+                    'created_at' => $penjualan->created_at,
+                    'updated_at' => $penjualan->created_at,
                 ];
             }
 
@@ -169,7 +183,7 @@ class PenjualanSeeder extends Seeder
                 'jumlah_bayar' => $jumlah_bayar,
                 'kembalian' => $kembalian,
                 'status_pembayaran' => $status_pembayaran_choice,
-                'updated_at' => now(),
+                'updated_at' => $penjualan->created_at,
             ]);
         }
     }
