@@ -22,6 +22,11 @@ class PenjualanSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('penjualans')->truncate();
+        DB::table('penjualan_produks')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
         // Initialize Ffaker with Indonesian locale
         $faker = Faker::create('id_ID');
 
@@ -66,7 +71,7 @@ class PenjualanSeeder extends Seeder
 
             // Determine date: 20% today, 80% past year (weighted to recent months)
             $is_today = $i < $today_sales;
-            $tanggal_penjualan = $is_today 
+            $tanggal_penjualan = $is_today
                 ? $today->format('Y-m-d')
                 : $faker->dateTimeBetween('-1 week', 'now', 'Asia/Jayapura')->format('Y-m-d');
 

@@ -1,141 +1,132 @@
-<?php //00363
-// IONCUBE ENCODER 14.0 EVALUATION
-// THIS LICENSE MESSAGE IS ONLY ADDED BY THE EVALUATION ENCODER AND
-// IS NOT PRESENT IN PRODUCTION ENCODED FILES
+@extends('dasbor')
 
-if(extension_loaded('ionCube Loader')){die('The file '.__FILE__." is corrupted.\n");}echo("\nScript error: the ".(($cli=(php_sapi_name()=='cli')) ?'ionCube':'<a href="https://www.ioncube.com">ionCube</a>')." Loader for PHP needs to be installed.\n\nThe ionCube Loader is the industry standard PHP extension for running protected PHP code,\nand can usually be added easily to a PHP installation.\n\nFor Loaders please visit".($cli?":\n\nhttps://get-loader.ioncube.com\n\nFor":' <a href="https://get-loader.ioncube.com">get-loader.ioncube.com</a> and for')." an instructional video please see".($cli?":\n\nhttp://ioncu.be/LV\n\n":' <a href="http://ioncu.be/LV">http://ioncu.be/LV</a> ')."\n\n");exit(199);
-?>
-HR+cPwOft6oBgIH3KlH9Jmpo49kkL230hLUEz82u/CoNRifloV12QmWl/c38xXkdLH7AWn51Rbw4
-lwS/0s8qgOXhCGe0SnkJtLO6yBwO6djaYEE7jBHpxPFKxY1FBqAtMI5E79+aR+EOLnwn2ttDNrZt
-JMc20eqPxeHw425GYQKPPwTihcwm+zowSPpUlRsnRzaE26kAJYQLxvQyJOMJIJP+ot+lIq0ev3ho
-DIsa7CXLyvFjSbmmkOIP31r+HmK6c3t+LrSfUL3xpFR1TFyzqu5mMeCCsYbcAWYM399aSuLUYRh3
-t0fK7iZzLlfPeEB/GGOqU4Wju3hOFapxGeCTaV/qyWa9g9G0YG2N09i0b02708u0dG2Q08S0b028
-0940c00g9ZrBSwLnn2o1f4kEw2tdQ+IiXcZWXHvihqPOXz8iplHb3oulRJI0YgadVHU9fuDO7sSi
-OJe3AJlwjwCIVER5dSuA7U4kjNhS7elqK1m7EeRNnzfgQSFJDuRMzU2k+v9XIFT9NTsbyFxM4aDq
-3xdD+sO26BjK6j2CkBx5TDEnaO0gQSE3wZxIS87jdDYH4SceUYTOfoSb7D84EIYqz/vKcB2pg1va
-X1IYX/H0BlK8qX8rUr9c7c+SpesQOyhQBMGSMx31uyZ9BX8wTdC+BhAcJjOD0veUZcLfIYnS9ito
-P/VhrC8iG3VOL6Cntcpc0uygYG5Ndh7oVdY0GfMHFyy1PNE+dFyosAEubwe3OqfEmHLtHHygHrCa
-yp7aNuHfXPnbs6FZqEhLqOOjwM/G5X9u4F4wiNJ27et4o4IBIzTEuyH1iYgRGGa991kH7iWjduJi
-yxeONKL3MpQFnt2QQ/MdsVN7GYrTJhG1iH39uBUpDJiZkFvh9ZNo1UFzzfumjgrEMbUjxh3dsd4F
-yPLSFY/1h2mHMyBmzYXeOnplUXrXHNKSApgHGwWCpsgxAFJ1rNnA7UPi0WHSFJcSuBNJbH+ViAwC
-eujri6ELS1MIu9ypjMgWaGn/39pmi6X0vpYxTZJ/tROAIaAXGIF4yxLL9iQ9VDLR+iBwFzJl/jKn
-PWgVLtI7CTztPcfi7Rr/sYWJQDEbEWX5C1naAS0Q50dluisvFTCX6wcLJOJLVbQKmKxbgxzy21hN
-Z7Izsq+5Pdh+t3HK8LcHRPR0yloSjVvf/P7WIr1Sd9uWyuuGaktZduCZNWBaep53FY9L3tgs76JL
-Qpkj77a5MnNKWBLbEAaaERJjfqKdaT9YLNRV59QKXlp7EqMihVtdPf9Fh+p2TgFXQR1KRdkpokJ9
-Y2ALjPVSmZ1TugwIho88jdB76SttOsPlV24IG5qQHsHTA+Uki6B2wdcVbIFifMSX8knn2BG6YwA2
-Izw/KPhzpMFowm6lR7j4qJu+B/OUOZ/WzFPkP680P5K4reM8cCNmDmrVU13MglKJoOSk0OiGoMYq
-eJsM3gx0gSOoIGVaM2GvlcGHREQZ+y9ErXSuI/MO+kn/d9S7bWD6SWMCkLirWOaAiu4AxtK98p/d
-LWK5OQvWxZ/Ku74sbwjnHgIzyZFqjLKW2iYaX9R4wxbdGsfZd2U/w95y2D/6NG/dm5R4hCuNBW5t
-gzbRUZQFAzWAQ9T92m6uey++MRyhS7GV0nQFB0+BbAbRel1ngo8p0yac9xt+oFMxnexn9FEBScGW
-vd6HFQZwpU7YnZFSR9qFX0AfTwT0pzQFaxAp678q1+aEdhO8e4MppE5Jtqht7op6IeESrm0948ZX
-BoSs8XmBMZ5nlgHp5qe8jCThoEDwtJKfmcIWuQgz1dV+KJZOjk1bV+hgBPOO99U8LvYdeoKZywFW
-deQPkLkViTennsyUBOfuxajW4mNERf2U9XSv/51f0P/z+Av/L0In88j0L1LDZ1ZjhqQHKsDlZrPA
-y5uKbaTYaemYRV6K5YGzt7tBnYlwZlmeNn/egNgaJdpIYAXSqg6hYyDhK2GIEjhvNhNUEke4mnc2
-hPBBcNp8VECzRNdsuytHP2PiqSkAibz0zd2HGXU8qgaDQ5B/kmBU77W5J0+TPUz4I319ArUHVqCM
-GNVRQH9SY15K/v5WEa3UKc359ZtUvsTsuj3VgpYvwCLVpdTqws+f2mp1ZVcXsf66Rs1rfCurVLu3
-Ih+tv4IFuOaCuJzpDU+HGNCRw7MWYBTFPuWl5OeekHT8HUjthPzjDHgYe6Y8uVzsANqdkHH/wQBh
-AMpxkwUvXqF3eeJrfTFd8EicPAQ5DVOGM3aq6euvRXlveEy4w72r74VqiDb3IbWNPSiWEiqYqxLh
-85W4EgLcAW5nnrhxrMYCu3xv050T6Heb4ZR2b/y0nXse2ziQCNECAeqGNuzpLmIheDcGtOrnTc3B
-sBGvYxtnqrbiHYCGqp1ua/XtRGPWlzOV8vu8XvXO49BTdX4GC4XURRxnRGAj31zP/KW/v/Fq1/Oz
-rSV1TfClSDiu4VHHCAXKGPZIVlR1zMLeCMsb7MYZO6hGTuqZs4AADdAHkpvdyxlCq+Y+AElryr66
-2LbKI0L5lTSV9yozoEZQ1eCDCuWnPg0MISYQoLh4lMEkRICu3ENRDelZPOu4DUxU3xP3mGQeuFv+
-1NlYJ70ViqZXE37oyCWxLiUcPMDoW2dV0yT8d5rxVr176hZrMmrhVilB1h2jMsso+bkgf43KT6uW
-0eL4WQErraZQurSrWtRTLmoNB0geLcYjh2DP/E1b5QEorjBNDlF0fTHBVfi7ZRdDtY3NKS7IjI5s
-NmsiLtgXTul1GlWx80QX39hUgrY0mISJHKyIWO3pXiVLky//R7HPLHycwuTGGuq/GJq53BX4eJk9
-s3km2J8jw5tiP1EkVH9MqdAiLAczFrdyi9Elm9DyZuUtYQlmDdKGmkjWTJYlQUhETxMjO/puSQBK
-/n/7Bi4jKKGk4ArmVctRkfQ8evDoejqlVgSa7sLnqFiA3OPaCldsE3bWd9PKmFcu+hQak30eF/Ot
-jGqz1P6CZhNN3ziLfAwXiMk3LX8AFlqx+HHJ0vAQcf9yaNnJ74SZ35oA2sIX5M13/22OtMBkzGk2
-+fA4NrUgA96JRJOj7WKST8ThTR/Ykyfi/R3H6aVccABwCEr4OMLO2N6pg6w88oO0DsRm5jzALXGo
-FsxtriiJMql2PhY6knxsewNB7fPrNO39boQJCMZPS2Wuk4YbyiKTRcwHGlNsaQppMYlvq6OD2LUW
-5juRqApODzFByZ6GuL4ZX7eprzO6eS55J3AvdjtP57CCsBNp/wuSNz73prXzOJLCmjKC+7YYLPyo
-AP13i/0nX3KG7KpX6bZ6Wp98lh3+Y0C5SPSJm6FXUEFY4xp5EJh0E9N705+l6orRh3AQfVnte/CP
-oLqzk07wTjd6qfzV0GWze0kdkGAh3HwzzI+zmZP4nvFAMrbU4tTPd/d+UMEzD4jEAxuwopGUbpsF
-tOqnLEByKvDx5v1xmpy7Er2/7PWnUnbZxIoUvbu+IqXL/oou4Tis0bG2MKWm2rZ/iYYbeJXK4R5L
-f6+cDmYurypYYcqtaTNfZ5DwU5Q/sy7StQf6IhPcz4YAtJ1k62O00fv/z0/ojhwgY8qnnHFCqe6Y
-YTVzFz6iKZVl6JXYqIeawNodJOkJtsCSoKpdz2Uy05Me3Sq74NxTjHyqlWdiL//u4d0U52/jQLGU
-eXF1JBOc5XCP2rDeStHZPBHJOM6vty56tfDk7QGqDCJu/IK/dXNpPK8I56wsIdsmdL94ZnjM4H13
-EKY1r9voxk757sASWhdN0sx4x7iK4OR+N2YvdsO1dov8VzaOoEJNw1pdpfFcqGHireFfkCvMa/7k
-AtWLIWh/vQFmR3i6mq6frnuUdWzDwznxI2hjzMwIhfOnSgU2kBDNASda0IFNyGbpzSzjiI/7gjTU
-oel50MhdrtNLKDQ9JFMtrAZsf7aC3NDiRqslUVUS90Kq1/ucPLdw+45O4FCd7jEoi/rbVnlYIns7
-1OmesGR5M7NZZ2rPH7jquxOW06JwjxSQvU2m3yCNJNdFZQi10EwsT2RXwI/Nxcav8jBBRdl5Wq2T
-w69y2+4e8eckkoQf2FtileshQlA8feDF7qBvWf4NNDdKLomFQwSpOU+jIQxdLs6Otiaf8Rk9WjeF
-ZVzGdJ0PFQTBLpf20Vgb/DYQ8KCQYmaoVfp6TAO8seIQUGki5Pdl+gXkfBsyIvc01/EOKdQkN+tt
-wHpaL5EXqKajnNZA1FSRaMO5VwlpXE0gEV3g0xWA5eIsK1Q2JtYrp0t15PAk+CHHbZ64YoaKROvv
-u+F6RXw33BXYBaBlN5aundYoIy8UyVkXmLO5XjKdxVyZRMwLHjWanwDo4zxCo91E3HEc0bIJYWr9
-FfXa7uqlvlPbE5k/RVS0+TPnk917jxrO61wij7vK8ajya62PWj+h38WFTG0DdT3i0bxxIYugEN9h
-LWxPbd8/r7d2BSvhLLMzFxdHBcWAf0BQ66UjXOiBImXf+EmbEtpLv+ZzQjX3LXtYl//UflCj2CHI
-8myzyc95b0G3mBrqIUMcOHX4AhJ2TPI1xyK9At697ljNx26LcZKPFaWUCpZugo+96oHpz7UDe6Ii
-cjvVzOoRQCt2+w2B41t4aKyFX7yHMTOPaexardZPt9AOHta9Mfynx/FTnpiwZQcfjhbmFaOBdx55
-LgIPHBgpdEn9SOe9/xxu8q/J7WszQsz02tiTiA2a2tTb+afjIp4+QxpV9GW5JS/mv65Id3v6Yo/K
-zCpld6Qgjxztjtf5bprrNiao9mlr1/9Zw8b7rFQEwuFRRJujUtnBJ/TCftRDNsZP9oryMd0bIncx
-N8a4WfB4hbEgfFA9/moYK5/SoDLxU5ORpTpzYhYM8cK5eXsbiG0SSqfcjVNwKyi5bPoPoYF1LCn0
-75rHjP/ZDKt/4jEsL4+pjfzBQ/BgjmpWo9EfNnah9kqr+KcukiE/iKdKvxw9onkgKOGimnB4IiLR
-QAevhwiJOhcE9e1PD0fWIpZw9STBE1egcerzjqHGYjSGc8qoNJ7Bq5btKUYzyjlU0kGjmUc8a9h+
-DsOP54l8Xuei1cx+am6lAyB1D5MpKBBl2AUyXSBL0fp9yZjU6RwLEntYPLgbGDAXYXfUCH+0L3DP
-ug3dKhue0kFy/7s52fx5ZOReECUek92JxnKmaDDBWA/Uqe5ZsGeVpXPSSaV/pb7h8q1u6lihmnli
-4P1xkPPgNfbnk9B1hXY2Vq8uLsZkhph2Z4ZKXVOesr0KhgQ203HJs5BFhW4SLBRTuYEluYhimu0M
-5wn+JngSymia88fN6+TqZAS50tiGNl7TvRQVZGWmEeomutWosdl3ZTO3FYTO0EnY5KP457EDsars
-ZpHA/nxMYZT/jPNE+SosO8v61fCvY91GYoNHoK4FryDcgIvD6svNLuiLCiCBHndCmRHUDJWmoNFW
-a4jZ0XiaFQyvUhw0gIMQkgpw+u7Z76OpT7Wl2kODklt0wQFzUuCC6BqOzurJCVx5suFoVwMLO/Et
-C9Wn3pRoyyNpyUpiumNazfyV+VVbYi9NAOPkKF9isEzRFdEqfg0MrrQoaCXnRLAU1HnDAfBnz7BK
-qf6azRvqJMObcBpyevW/DpuotIe2VwuUyDmqK75zKwBD5hDLOurpUrrYUEZheD5LuS/8ySFi+cZD
-BwcfohLv4AqdHiRu2rv7piZWxh1vzWvEB+sQDXFOGlKu1wdUgOyCrHX5o3Vg9drrwwDAzUNtYB/Y
-AMWW30XwtT0AlAq6luRqJRWEE4YRFZ1sfMNiTJGcUOeIxeLq6MQAuqdzg97oqGIUBqyQLUJ6ri4g
-LUhGJ2VJvnzXT+/yUNMe2O8qXvrRAGc90OO6A5QP/1kwlbBy62sEjg+CMKaiQkO9X1cMQPSa8IqV
-ScwbWvA6sp7nK384TrSE6DADYS9ykUiZn80YjNnkPxMmlhbbk+a4Z5fjai3y+8NHQYnEKA5IimDu
-oVRZ88vYg+/XGtwGbhdXG19awYUowHMVyqBmnPXJFKz6v45bi8sjsDfIc/+FMns1yhIjYHPxf+7x
-Sd5Llj/F86epJsXF8HF0hmR7h8TuAl5+QyoS1GEGyOe3rLv3cpWEeikV79LjJrluhyURfhbL4fKM
-0d/H//ggug1xRrNMokSw9sduK/VhqlAx+XIUUMjozeRIHJIsYz+JGxhm/D1PaJMiFwkwwFAXiP6N
-+GKtjweVLcNj9H8jbDMIB6aLD7kg2U4pEkhtapa7X9anHqGEUO6oHnb12jcbfjANjOQnFIniul2m
-35eKOV/ywUQbnHQe3zNzG1mbB9rDMur4dPXpOF4M10okRp5V9j+8C1kIkz28ACtBNJ8toNxgEJ/v
-0XZZVBGB/uI+2YAI8lBBDAoRVdZjG/oXoBeeRZjMldP0zjWjstbjs0mH9zDcs/uVRECGbRGQALQC
-Xc3AIy0ONvMRvTW7jAhUvUfb0HvmVTpa6dMC2FTLfWbup1eS16fVAnbOiEYUh+OkS+tf3qULXSg2
-92r9NqN8Ee10KF8lC7+rt0OnPaG5VI8a10O9IDKkqKcIfS9+/gG9EvF8+jlQB4RFg1DCr+IiD0k4
-3JqV5O0PsbB04Rr+eSxJ0g+7KAw+lxhnpFZtj21rvtao/x9kCXN4BS2ROqpOhfaZPRNoHUrL+QVn
-42/qk8EWPbIpVlo2kf/E8bMPPdK2WiJOL2w/qzV82M6sX2UpcOWXLq8buqal4ZLgymzq3omHtsnB
-BAoqJUTy+g7BQmal78Wf2ZCY1Zhzj7Q7wx7VopO2PSqPs32jiHf02bK/Tmq1UUb3ayiaf3J6jvJZ
-ekDVsenurPWxZ6KOwJdk+fAS8TSYVEZY4PlzyZeDGXL0V1080cRY/oxwa6pFFpra9rpnr39g0sm8
-6WTeYly8OBKCP2BBCw/CoWAkWbSsuTmw7ujXc5STqMiSkVqi5LzsNEydPiag0Cxm4+37IfEPvhwb
-5/ik7J/gBMnVszb7n4gFKuA1FeLRxY4pxoUSuRQ0k0u0n9yu/lINjIoXEC92fM+zrkGxCTLZhEoy
-06Wea0DowtjnIdmZr+lixuWFnxKADXTURx1nULMlDlijIMmOggMAdy3j1sajJe2zvAJkpbmxZcim
-TeeVjRQJ1VsFWUVi7hS8FRk+EnnSZjz5DHF/dZCNuu7sNgIDJETpb9yvrNPFdW/4HbBfAOyN+i/h
-fzHMEcA34wqY+LC93XqA4H5K9+n9qadBd5imnv8rPPWpYxaJQVnB/7fQG6z7dsPYxADCfN6D4ER9
-NuQyZW9lo9SDKmvodqe+5339peOP9+69/iDUV3ekNUIkep+yFNctTDfppBOFBshO2lc1TR5/bWt9
-9ClzqcStMNAz4GED3DbV54AhUIFdKABoymXWrTKXG1Fbu2rzihg8TsT6qZ2Oa0zvRMZGMFDvi5OR
-fRguhRtV2UOhU3kt1li2+IOxDtsF1SGc1FQYiAo+Ym18cgRrX0dpBjCokBPsdP45XKnkTgLPfrVf
-ulW7+nvJ9VLGp5OO0USKhse5U/z7Zumx+qU2VrgHITyMLuw1wzJlyditJlIU8H/DBZyhbp651i+n
-d3RCide8TKPaVPwZk+ZnoXG1ayFoE9v0qdKIbvwgkSiD6+to8sX4sr5bEU6onTX0ZDG6Q79Ry2O5
-ezSbyjd5v/bcU7yw52Ok/+izLRC2pfONDJ5oA+uc9uZNchGmwa6+D4dRPS7ly6pMdyTcsKCLm87U
-1QSN/tMDqPurDbTRs4LHYIx42zuIPbQQxZOjCq0eTkXTV8b44IgfcLdn5H3IVKJyHVP7EOM52bDY
-S9NLnHmjiSyYWc1+1QvLcGEGNINJjriwKWRVTneF3MbPLFT09X1Lefvqfy0c8Z8GS5ZHAnz+D3DW
-/ToBx7/4aAileDPU5oPb80tjxhQx/C/nWWbgWud+Yq59WXpxrzSgzzdmQ9Ujxrxv8phGN/U+toxo
-1k9kp9Ez0WEs4EDBHl96zvwd0c49UJD8fhGCbo+4ZCl/ydAxbZNIkPN8gtPB0yNT5kEqcRfh5Rs7
-CEoKXkQAXxwan5mo6VKG8f2nziorTwz+BJ2eJA0LLlh1DJUlvMF+VXGfzuUarYfC8sw+ojBp1LU4
-cfWitL+sbfG4ixk3T0T7nsJQ3V/30ObeN5CfMr2nr4eWJxp+Ek17BGR8tBXZfZP/vnHTCnqxneE/
-Jb4W4OxNNGW/WLkwAqpLSypxNs9okeHmnE4mBFxJ0xx1J66kpvITudeG1giAHrkrdmZBEIYp+/zl
-t2oAUdUpYADwTx7ny7fZHjRLpCUZirqcDdVtkLM99PrxeQXAp8Cqgo8vnaIFWGo3hW9I8dHDKJQu
-6gNBidZC1a7dPIs2LiGv1Mu9Lz895ZYcf525VgJ/gNC673YfTu3Wq7/Gx3EpwQuswAp6wFlrhbEr
-qsUSDCdg/4VRotvM+h0kjrk6s3MqnuurqVsBja3GEjAzoo0INaLbhlFgwPlPGV1OfhcxFuRpupzn
-IRBleZrwOPn8IORVAkJmxxIJ2j6aUJspwrjWaikJB7CoI2pBAK2TGePuzBV9XsKwoKjBFxBZbvAo
-94d4Sgu5KmQqDVJO9LrJdvRHELLQQX8rvD7hLba90FeG6FpPtkUKuKK6o+Nq/R7fDaygSlT2HwmZ
-xsINSWWiGDiCCoA9Y9vdya4ea2bZqkzc/1TzZ+kya2vgJbYYuFT4TcdrZg7lZtLaB4aJUgv6N3Wa
-3aHIZ9nswGDmvm9EqN0k1iUbclwy4cA48kon+xy9Y6NpiP2IZ/cLsgGFW1HaJIbXzQgP7JzGrm65
-Hyqb+xtEwdC1PmI0SqGEjlaQm1QPxPBEWDHR5BF1zEcxdEQj6r301aYbhd8rgcQhhFo0Og+LQdG2
-/K4vayLGX5lbycMAlj3bSyS43UDv/deWDHMvOzKpkVGomVuK/ZFKni1ftDsGjFIF2CFod4bAGPp8
-0sA1ZosrVdhiUIucRqMS6kILQTaPqJJeEfrCzez4IlFjGZqJ6JrBZJcFMnzWTF03pszr/2npvmtk
-xhPwtK32Db8r6FVtfqWm0ckYVK/plBDrdNh/L1LJ5YHcIEYEhFPdgRqwER16A/WYNB2Qg8u5d4Qe
-sTN0nIoahW/E/JYvEFE2pzddyHLi8SuUBpCC5JBIMLuAeCi3/rv9Z/oMiKVQKdg2OC6ahP1nC+IL
-QTT5GT4m9/jXfp+wJwhMWprQTO3qlEqTH7+Qb17xCv9KdiTFMg4pdGrvgiflyPbjGYtuaiSvuGI4
-fqO2HK4xLP6suoeW1qIwL3TjjWdevnGx4wuKgzVqOcsiT66k9Hmb9Has3NsuFQigd6Wl0790VKdA
-Ez4dsOkrwXGoFJhLDL2U4egfUIx357tJOjd+1xIKlfNStUQuVNJWe4W65osIDg/5PSuufyEsKthW
-YY1BfwGag1ezNvo4SQ2aTeApEVIkJU1e8ZcMfTkDkS2s1rtEzWMGq4rUWswODFcAHa3keuWC6o6S
-QYnowecldyAoeQDr3k2fPna6bvM+NHY+QI/NOn5wDpARTIP1W8LlOd2wmF4f32XWf5ZOFMse0c9z
-LnLHTMNYHPDoP4gFXP2PTcN9gIcFGYvA5s/Le3cLh5gsRGvnFkItt7gjVQo+X8YM+nHCs4RqzuQA
-X/wr0/+LEWYdLNTIv8NvjoOcxjwOttIOcTToC8HO9paJwqnBg9+f2Z7ZAyKnDajoKwknGHf6zEVb
-95rrIJxcrJgDC7k4ztbPHZcbPcm17G6wCwH8qRZst7Xi/rpDMhxRr8Tn4CD6DdNMkjB1yRqmasum
-LB+fmbGI3NOs3cNPo8uNVvOA2EIKbz4vk7GiwsCrBGL02CvlwNX1KlNgbHXfJqEvujrTIKiEN66F
-cZlhdfb3YqQQ5jjjjku3WtTn26rnoj1srTxTBN/WOVhqaCgQ+Wvtvj2/JQoPBv74t5CVRatqz2YL
-/9tfHjz1AdGvfzl0x52od7QUJoXlUeBMdz8KB943LmxOYWTsIPdcewKn/Ie6Yj5vulGll25xVJgh
-xOFfDC3+zuo43+/7zz4qh7jb9Wc+ZMq4csC/OFqXT58a4MYu8FHAESg1Pg3wImhqKUwV7u/a2bOp
-ALKZoYOpffaG4u9fy2exfB+Sfemf+Wc3CABCJoUoFdLfO1KLlkyqJICGhIsyyZcO45TXWSKmTWoz
-iPmt7Li=
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fas fa-user me-2"></i>Profile User</h4>
+                </div>
+                <div class="card-body">
+                    @if (session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    @endif
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <ul class="mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    @endif
+
+                    <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+
+                        <!-- Avatar Section -->
+                        <div class="row mb-4">
+                            <div class="col-md-4 text-center">
+                                <div class="avatar-preview mb-3">
+                                    @if($user->avatar)
+                                        <img src="{{ asset('storage/avatars/' . $user->avatar) }}" 
+                                             alt="Avatar" class="rounded-circle" width="120" height="120">
+                                    @else
+                                        <div class="bg-secondary rounded-circle d-flex align-items-center justify-content-center" 
+                                             style="width: 120px; height: 120px; margin: 0 auto;">
+                                            <i class="fas fa-user fa-3x text-white"></i>
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="mb-3">
+                                    <label for="avatar" class="form-label">Foto Profile</label>
+                                    <input type="file" class="form-control" id="avatar" name="avatar" accept="image/*">
+                                    <small class="text-muted">Format: JPG, PNG, GIF (Max: 2MB)</small>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <!-- Name Field -->
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Nama Lengkap</label>
+                                    <input type="text" class="form-control" id="name" name="name" 
+                                           value="{{ old('name', $user->name) }}" required>
+                                </div>
+
+                                <!-- Email Field -->
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" 
+                                           value="{{ old('email', $user->email) }}" required>
+                                </div>
+
+                                <!-- Phone Field -->
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Nomor Telepon</label>
+                                    <input type="text" class="form-control" id="phone" name="phone" 
+                                           value="{{ old('phone', $user->phone) }}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Address Field -->
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Alamat</label>
+                            <textarea class="form-control" id="address" name="address" rows="3">{{ old('address', $user->address) }}</textarea>
+                        </div>
+
+                        <!-- Account Info -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Tanggal Bergabung</label>
+                                <input type="text" class="form-control" 
+                                       value="{{ $user->created_at->format('d F Y') }}" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Terakhir Update</label>
+                                <input type="text" class="form-control" 
+                                       value="{{ $user->updated_at->format('d F Y H:i:s') }}" readonly>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="{{ route('dasbor') }}" class="btn btn-secondary me-md-2">
+                                <i class="fas fa-times"></i> Batal
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Simpan Perubahan
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Preview avatar before upload
+document.getElementById('avatar').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const preview = document.querySelector('.avatar-preview img, .avatar-preview div');
+            if (preview.tagName === 'IMG') {
+                preview.src = e.target.result;
+            } else {
+                preview.innerHTML = `<img src="${e.target.result}" class="rounded-circle" width="120" height="120">`;
+            }
+        };
+        reader.readAsDataURL(file);
+    }
+});
+</script>
+@endsection
